@@ -17,6 +17,7 @@
     "@nuxtjs/bulma": "^1.2.3",
     "@nuxtjs/dotenv": "^1.3.0",
     "@nuxtjs/pwa": "^2.6.0",
+    "@tryghost/content-api": "^1.0.0",
     "cross-env": "^5.2.0",
     "express": "^4.16.4",
     "nuxt": "^2.4.0"
