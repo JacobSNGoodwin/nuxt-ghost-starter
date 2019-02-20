@@ -41,7 +41,9 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/bulma',
+    '@nuxtjs/dotenv'
   ],
   /*
   ** Axios module configuration
@@ -57,6 +59,15 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+    postcss: {
+      plugins: {
+        'postcss-preset-env': {
+          features: {
+            customProperties: false
+          }
+        }
+      }
+    },
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
