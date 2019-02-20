@@ -82,3 +82,5 @@ dist
 
 # Service worker
 sw.*
+.env.dev.local
+.env.dev

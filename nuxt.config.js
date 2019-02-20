@@ -1,4 +1,5 @@
 const pkg = require('./package')
+require('dotenv').config()
 
 module.exports = {
   mode: 'universal',
@@ -40,7 +41,7 @@ module.exports = {
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
+    // '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/bulma',
     '@nuxtjs/dotenv'
@@ -48,26 +49,29 @@ module.exports = {
   /*
   ** Axios module configuration
   */
-  axios: {
-    // See https://github.com/nuxt-community/axios-module#options
+  // axios: {
+  //   // See https://github.com/nuxt-community/axios-module#options
+  // },
+  env: {
+    // loaded from .env.dev file locally and from netlify in deployment
+    ghostUri: process.env.GHOST_URI,
+    ghostKey: process.env.GHOST_KEY
   },
-
+  workbox: {
+    dev: false
+  },
   /*
   ** Build configuration
   */
   build: {
-    /*
-    ** You can extend webpack config here
-    */
     postcss: {
-      plugins: {
-        'postcss-preset-env': {
-          features: {
-            customProperties: false
-          }
+      preset: {
+        features: {
+          customProperties: false
         }
       }
     },
+    // },
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
