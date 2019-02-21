@@ -61,6 +61,15 @@ module.exports = {
     dev: false
   },
   /*
+  * Generate dynamic routes for static site generations
+  */
+  generate: {
+    routes: [
+      '/posts/1',
+      '/posts/2'
+    ]
+  },
+  /*
   ** Build configuration
   */
   build: {
