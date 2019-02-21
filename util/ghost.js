@@ -7,4 +7,8 @@ const api = new GhostContentAPI({
   version: 'v2'
 })
 
-export { api as default }
+const generateRoutes = async () => {
+
+}
+
+export { api as default, generateRoutes }
