@@ -65,7 +65,7 @@ export default {
   * Generate dynamic routes for static site generations
   */
   generate: {
-    routes: generateRoutes(process.env.GHOST_URI, process.env.GHOST_KEY)
+    routes: generateRoutes
   },
   /*
   ** Build configuration
