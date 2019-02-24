@@ -1,7 +1,8 @@
+import { generateRoutes } from './util/ghost'
 const pkg = require('./package')
 require('dotenv').config()
 
-module.exports = {
+export default {
   mode: 'universal',
 
   /*
@@ -53,7 +54,7 @@ module.exports = {
   //   // See https://github.com/nuxt-community/axios-module#options
   // },
   env: {
-    // loaded from .env.dev file locally and from netlify in deployment
+    // loaded from .env file locally and from netlify in deployment
     ghostUri: process.env.GHOST_URI,
     ghostKey: process.env.GHOST_KEY
   },
@@ -64,15 +65,15 @@ module.exports = {
   * Generate dynamic routes for static site generations
   */
   generate: {
-    routes: [
-      '/posts/1',
-      '/posts/2'
-    ]
+    routes: generateRoutes(process.env.GHOST_URI, process.env.GHOST_KEY)
   },
   /*
   ** Build configuration
   */
   build: {
+    // babel: {
+    //   presets: ['@nuxt/babel-preset-app']
+    // },
     postcss: {
       preset: {
         features: {
