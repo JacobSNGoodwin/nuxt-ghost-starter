@@ -1,5 +1,5 @@
 <template>
   <section class="section">
-    <h1>A post title</h1>
+    <h1>An author name</h1>
   </section>
 </template>

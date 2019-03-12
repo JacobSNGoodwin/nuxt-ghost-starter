@@ -19,12 +19,28 @@ const generateRoutes = async () => {
   const routes = []
 
   // create posts routes
-  const posts = await api.posts.browse({ fields: 'title,slug,id', limit: 'all' })
+  const posts = await api.posts.browse({
+    fields: 'title,slug,id',
+    limit: 'all',
+    order: 'published_at DESC' })
 
   posts.forEach((post) => {
     routes.push({
-      route: '/posts/' + post.slug,
+      route: '/' + post.slug,
       payload: post
+    })
+  })
+
+  // get pages
+  const pages = await api.pages.browse({
+    fields: 'title,slug,id',
+    limit: 'all',
+    order: 'name ASC' })
+
+  pages.forEach((page) => {
+    routes.push({
+      route: '/' + page.slug,
+      payload: page
     })
   })
 
@@ -38,6 +54,21 @@ const generateRoutes = async () => {
     routes.push({
       route: '/tags/' + tag.slug,
       payload: tag
+    })
+  })
+
+  // create author routes
+  const authors = await api.authors.browse({
+    fields: 'id,slug,name',
+    limit: 'all'
+  })
+
+  console.log(authors)
+
+  authors.forEach((author) => {
+    routes.push({
+      route: '/authors/' + author.slug,
+      payload: author
     })
   })
 
