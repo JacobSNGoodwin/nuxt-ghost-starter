@@ -1,15 +1,24 @@
 <template>
   <section class="section">
     <div class="container">
-      <h1 v-for="post in posts" :key="post.id" class="title has-text-weight-bold has-text-centered">
-        Home page
-      </h1>
+      <h1>Home Page</h1>
     </div>
   </section>
 </template>
 
 <script>
+import { ghostAPI } from '@/util/ghost'
 export default {
-  name: 'PostIndex'
+  name: 'PostIndex',
+  async asyncData() {
+    const posts = await ghostAPI().posts.browse({
+      fields: 'title,slug,id',
+      limit: 'all',
+      order: 'published_at DESC'
+    })
+    return {
+      posts
+    }
+  }
 }
 </script>

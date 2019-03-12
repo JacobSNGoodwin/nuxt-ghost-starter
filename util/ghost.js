@@ -1,7 +1,7 @@
 import GhostContentAPI from '@tryghost/content-api'
 
 // we have this function accept variables to be accessible to config.js
-const ghostAPI = (host, key) => {
+const ghost = (host, key) => {
   return new GhostContentAPI({
     host: host,
     key: key,
@@ -13,7 +13,7 @@ const generateRoutes = async () => {
   const host = process.env.GHOST_URI
   const key = process.env.GHOST_KEY
 
-  const api = ghostAPI(host, key)
+  const api = ghost(host, key)
 
   // initialize array of routes to be filled
   const routes = []
@@ -63,8 +63,6 @@ const generateRoutes = async () => {
     limit: 'all'
   })
 
-  console.log(authors)
-
   authors.forEach((author) => {
     routes.push({
       route: '/authors/' + author.slug,
@@ -73,6 +71,11 @@ const generateRoutes = async () => {
   })
 
   return routes
+}
+
+const ghostAPI = () => {
+  // called as function to make sure env variables are available
+  return ghost(process.env.GHOST_URI, process.env.GHOST_KEY)
 }
 
 export { ghostAPI, generateRoutes }
