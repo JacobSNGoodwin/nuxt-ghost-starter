@@ -9,21 +9,39 @@ const ghostAPI = (host, key) => {
   })
 }
 
-const generateRoutes = () => {
+const generateRoutes = async () => {
   const host = process.env.GHOST_URI
   const key = process.env.GHOST_KEY
 
   const api = ghostAPI(host, key)
 
-  // consider chaining or using async await go generate pages and tags routes
-  // before returning final array
-  return api.posts.browse({ fields: 'slug,id' }).then((posts) => {
-    return posts.map((post) => {
-      return '/posts/' + post.slug
+  // initialize array of routes to be filled
+  const routes = []
+
+  // create posts routes
+  const posts = await api.posts.browse({ fields: 'title,slug,id', limit: 'all' })
+
+  posts.forEach((post) => {
+    routes.push({
+      route: '/posts/' + post.slug,
+      payload: post
     })
-  }).catch((err) => {
-    console.log(err)
   })
+
+  // create tag routes
+  const tags = await api.tags.browse({
+    fields: 'name,slug,id',
+    limit: 'all',
+    filter: 'visibility:public' })
+
+  tags.forEach((tag) => {
+    routes.push({
+      route: '/tags/' + tag.slug,
+      payload: tag
+    })
+  })
+
+  return routes
 }
 
 export { ghostAPI, generateRoutes }
