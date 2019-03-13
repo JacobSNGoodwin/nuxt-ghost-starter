@@ -29,6 +29,7 @@ export default {
   ** Global CSS
   */
   css: [
+    '@/assets/css/main.scss'
   ],
 
   /*
@@ -44,7 +45,6 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     // '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    '@nuxtjs/bulma',
     '@nuxtjs/dotenv'
   ],
   /*

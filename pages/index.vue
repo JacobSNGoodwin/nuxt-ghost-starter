@@ -1,9 +1,12 @@
 <template>
   <section class="section">
     <div class="container">
-      <h1 v-for="post in posts" :key="post.id">
-        {{ post.title }}
+      <h1 class="title is-1 has-text-primary has-text-centered">
+        The Greatest Home Page Ever
       </h1>
+      <h3 v-for="post in posts" :key="post.id">
+        {{ post.title }}
+      </h3>
       <nuxt-link to="page/2">
         Page 2!
       </nuxt-link>

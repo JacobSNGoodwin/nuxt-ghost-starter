@@ -52,7 +52,7 @@ const generateRoutes = async () => {
 
   tags.forEach((tag) => {
     routes.push({
-      route: '/tags/' + tag.slug,
+      route: '/tag/' + tag.slug,
       payload: tag
     })
   })
@@ -65,7 +65,7 @@ const generateRoutes = async () => {
 
   authors.forEach((author) => {
     routes.push({
-      route: '/authors/' + author.slug,
+      route: '/author/' + author.slug,
       payload: author
     })
   })
