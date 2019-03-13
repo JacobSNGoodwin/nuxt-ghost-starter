@@ -4,6 +4,9 @@
       <h1 v-for="post in posts" :key="post.id">
         {{ post.title }}
       </h1>
+      <nuxt-link to="page/2">
+        Page 2!
+      </nuxt-link>
     </div>
   </section>
 </template>
