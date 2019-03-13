@@ -1,7 +1,9 @@
 <template>
   <section class="section">
     <div class="container">
-      <h1>Home Page</h1>
+      <h1 v-for="post in posts" :key="post.id">
+        {{ post.title }}
+      </h1>
     </div>
   </section>
 </template>
@@ -12,9 +14,9 @@ export default {
   name: 'PostIndex',
   async asyncData() {
     const posts = await ghostAPI().posts.browse({
-      fields: 'title,slug,id',
-      limit: 'all',
-      order: 'published_at DESC'
+      limit: 5,
+      order: 'published_at DESC',
+      include: 'tags,authors'
     })
     return {
       posts
