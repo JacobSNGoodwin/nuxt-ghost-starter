@@ -48,12 +48,9 @@ export default {
     '@nuxtjs/dotenv',
     'nuxt-purgecss'
   ],
-  /*
-  ** Axios module configuration
-  */
-  // axios: {
-  //   // See https://github.com/nuxt-community/axios-module#options
-  // },
+  purgeCSS: {
+    // your settings here
+  },
   env: {
     // loaded from .env file locally and from netlify in deployment
     ghostUri: process.env.GHOST_URI,
@@ -75,6 +72,7 @@ export default {
     // babel: {
     //   presets: ['@nuxt/babel-preset-app']
     // },
+    extractCSS: true,
     postcss: {
       preset: {
         features: {

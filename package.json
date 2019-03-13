@@ -36,6 +36,7 @@
     "node-sass": "^4.11.0",
     "nodemon": "^1.18.9",
     "nuxt-purgecss": "^0.2.1",
-    "sass-loader": "^7.1.0"
+    "sass-loader": "^7.1.0",
+    "nuxt-bulma-slim": "^0.4.0"
   }
 }
