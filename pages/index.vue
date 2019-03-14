@@ -7,9 +7,6 @@
       <h3 v-for="post in posts" :key="post.id">
         {{ post.title }}
       </h3>
-      <nuxt-link to="page/2">
-        Page 2!
-      </nuxt-link>
     </div>
   </section>
 </template>
@@ -18,17 +15,21 @@
 import { ghostAPI } from '@/util/ghost'
 export default {
   name: 'PostIndex',
-  async asyncData() {
-    const posts = await ghostAPI().posts.browse({
-      limit: 2,
-      fields: 'title, slug, id',
-      order: 'published_at DESC',
-      include: 'tags,authors'
-    })
-
-    console.log(posts)
-    return {
-      posts
+  async asyncData({ params, error, payload }) {
+    if (payload) {
+      return {
+        posts: payload,
+        pagination: payload.meta.pagination
+      }
+    } else {
+      const posts = await ghostAPI().posts.browse({
+        limit: process.env.POSTS_PER_PAGE,
+        order: 'published_at DESC'
+      })
+      return {
+        posts,
+        pagination: posts.meta.pagination
+      }
     }
   }
 }
