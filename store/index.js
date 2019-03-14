@@ -3,7 +3,8 @@ import { ghostAPI, indexPostFields } from '@/util/ghost'
 export const state = () => ({
   postNav: [],
   indexPosts: [],
-  siteSettings: {}
+  currentPost: null,
+  siteSettings: null
 })
 
 export const mutations = {
@@ -13,6 +14,9 @@ export const mutations = {
   setIndexPosts(state, indexPosts) {
     state.indexPosts = indexPosts
     // console.log(state.indexPosts)
+  },
+  setCurrentPost(state, currentPost) {
+    state.currentPost = currentPost
   },
   setSiteSettings(state, siteSettings) {
     state.siteSettings = siteSettings
@@ -55,5 +59,31 @@ export const actions = {
     })
 
     commit('setIndexPosts', posts)
+  },
+  async getCurrentPost({ commit, state }, slug) {
+    // if not in posts links, look in page links
+    const postLinks = state.postNav.find(post => post.slug === slug)
+
+    if (!postLinks) {
+      // if it's not in lists of posts check for page
+      // TODO: catch errors
+      const page = await ghostAPI().pages.read({
+        slug,
+        include: 'authors, tags'
+      })
+
+      commit('setCurrentPost', page)
+    } else {
+      const post = await ghostAPI().posts.read({
+        slug,
+        include: 'authors,tags'
+      })
+
+      commit('setCurrentPost', {
+        ...post,
+        prevSlug: postLinks.prevSlug,
+        nextSlug: postLinks.nextSlug
+      })
+    }
   }
 }
