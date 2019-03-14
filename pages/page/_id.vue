@@ -1,37 +1,41 @@
 <template>
   <section class="section">
     <div class="container">
-      <h1 class="title is-1 has-text-primary has-text-centered">
-        The Greatest Home Page Ever
+      <h1 class="title is-1 has-text-centered">
+        {{ siteSettings.title }}
       </h1>
-      <h3 v-for="post in posts" :key="post.id">
-        {{ post.title }}
-      </h3>
+      <h2 class="subtitle has-text-centered">
+        {{ siteSettings.description }}
+      </h2>
+      <ul>
+        <li v-for="post in indexPosts" :key="post.uuid">
+          {{ post.title }}
+        </li>
+      </ul>
     </div>
   </section>
 </template>
 
 <script>
-import { ghostAPI } from '@/util/ghost'
 export default {
-  name: 'PostListPaginated',
-  async asyncData({ params, error, payload }) {
+  name: 'PostIndex',
+  computed: {
+    indexPosts() {
+      return this.$store.state.indexPosts
+    },
+    siteSettings() {
+      return this.$store.state.siteSettings
+    }
+  },
+  async fetch({ params, store, error, payload }) {
     if (payload) {
-      return {
-        posts: payload,
-        pagination: payload.meta.pagination
-      }
+      store.commit('setIndexPosts', payload)
     } else {
-      // need to add catch if page doesn't exist at some point
-      const posts = await ghostAPI().posts.browse({
-        limit: process.env.POSTS_PER_PAGE,
-        page: params.id,
-        order: 'published_at DESC'
+      // remember to use await here so data will be available
+      await store.dispatch('getIndexPosts', {
+        tag: null,
+        pageNumber: params.id
       })
-      return {
-        posts,
-        pagination: posts.meta.pagination
-      }
     }
   }
 }

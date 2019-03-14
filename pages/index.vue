@@ -1,35 +1,41 @@
 <template>
   <section class="section">
     <div class="container">
-      <h1 class="title is-1 has-text-primary has-text-centered">
-        The Greatest Home Page Ever
+      <h1 class="title is-1 has-text-centered">
+        {{ siteSettings.title }}
       </h1>
-      <h3 v-for="post in posts" :key="post.id">
-        {{ post.title }}
-      </h3>
+      <h2 class="subtitle has-text-centered">
+        {{ siteSettings.description }}
+      </h2>
+      <ul>
+        <li v-for="post in indexPosts" :key="post.uuid">
+          {{ post.title }}
+        </li>
+      </ul>
     </div>
   </section>
 </template>
 
 <script>
-import { ghostAPI } from '@/util/ghost'
 export default {
   name: 'PostIndex',
-  async asyncData({ params, error, payload }) {
+  computed: {
+    indexPosts() {
+      return this.$store.state.indexPosts
+    },
+    siteSettings() {
+      return this.$store.state.siteSettings
+    }
+  },
+  async fetch({ params, store, error, payload }) {
     if (payload) {
-      return {
-        posts: payload,
-        pagination: payload.meta.pagination
-      }
+      store.commit('setIndexPosts', payload)
     } else {
-      const posts = await ghostAPI().posts.browse({
-        limit: process.env.POSTS_PER_PAGE,
-        order: 'published_at DESC'
+      // remember to use await here so data will be available
+      await store.dispatch('getIndexPosts', {
+        tag: null,
+        pageNumber: 1
       })
-      return {
-        posts,
-        pagination: posts.meta.pagination
-      }
     }
   }
 }
