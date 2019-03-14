@@ -26,7 +26,7 @@ export default {
       include: 'tags,authors'
     })
 
-    console.log(posts.meta)
+    console.log(posts)
     return {
       posts
     }

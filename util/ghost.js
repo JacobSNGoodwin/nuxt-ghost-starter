@@ -1,10 +1,10 @@
 import GhostContentAPI from '@tryghost/content-api'
 
 // we have this function accept variables to be accessible to config.js
-const ghost = (host, key) => {
+const ghost = (url, key) => {
   return new GhostContentAPI({
-    host: host,
-    key: key,
+    url,
+    key,
     version: 'v2'
   })
 }
