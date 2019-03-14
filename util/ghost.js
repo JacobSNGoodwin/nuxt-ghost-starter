@@ -12,28 +12,55 @@ const ghost = (url, key) => {
 const generateRoutes = async () => {
   const host = process.env.GHOST_URI
   const key = process.env.GHOST_KEY
+  const perPage = process.env.POSTS_PER_PAGE
 
   const api = ghost(host, key)
 
   // initialize array of routes to be filled
   const routes = []
 
-  // create posts routes
-  const pages = await api.pages.browse({
-    limit: 2,
-    fields: 'title,slug,id',
-    order: 'published_at DESC'
-  })
+  // create posts pages and paginated (index) posts
+  // do while posts.meta.pagination.next
+  let nextPage = 1
+  do {
+    const posts = await api.posts.browse({
+      limit: perPage,
+      page: nextPage,
+      order: 'published_at DESC'
+    })
 
-  console.log(pages)
-  console.log(pages.meta)
+    /*
+    * To Do: Limit data passed into post list pages
+    */
 
-  // posts.forEach((post) => {
-  //   routes.push({
-  //     route: '/' + post.slug,
-  //     payload: post
-  //   })
-  // })
+    if (nextPage === 1) {
+      // push first PER_PAGE posts info to index
+      // we may want to pick a limited set of info in the future
+      routes.push({
+        route: '/',
+        payload: posts
+      })
+      posts.forEach((post) => {
+        routes.push({
+          route: '/' + post.slug,
+          payload: post
+        })
+      })
+    } else {
+      routes.push({
+        route: '/page/' + posts.meta.pagination.page,
+        payload: posts
+      })
+      posts.forEach((post) => {
+        routes.push({
+          route: '/' + post.slug,
+          payload: post
+        })
+      })
+    }
+
+    nextPage = posts.meta.pagination.next
+  } while (nextPage)
 
   // // get pages
   // const pages = await api.pages.browse({
