@@ -20,10 +20,13 @@ export default {
   name: 'PostIndex',
   async asyncData() {
     const posts = await ghostAPI().posts.browse({
-      limit: 5,
+      limit: 2,
+      fields: 'title, slug, id',
       order: 'published_at DESC',
       include: 'tags,authors'
     })
+
+    console.log(posts.meta)
     return {
       posts
     }

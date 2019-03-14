@@ -19,56 +19,60 @@ const generateRoutes = async () => {
   const routes = []
 
   // create posts routes
-  const posts = await api.posts.browse({
-    fields: 'title,slug,id',
-    limit: 'all',
-    order: 'published_at DESC' })
-
-  posts.forEach((post) => {
-    routes.push({
-      route: '/' + post.slug,
-      payload: post
-    })
-  })
-
-  // get pages
   const pages = await api.pages.browse({
+    limit: 2,
     fields: 'title,slug,id',
-    limit: 'all',
-    order: 'name ASC' })
-
-  pages.forEach((page) => {
-    routes.push({
-      route: '/' + page.slug,
-      payload: page
-    })
+    order: 'published_at DESC'
   })
 
-  // create tag routes
-  const tags = await api.tags.browse({
-    fields: 'name,slug,id',
-    limit: 'all',
-    filter: 'visibility:public' })
+  console.log(pages)
+  console.log(pages.meta)
 
-  tags.forEach((tag) => {
-    routes.push({
-      route: '/tag/' + tag.slug,
-      payload: tag
-    })
-  })
+  // posts.forEach((post) => {
+  //   routes.push({
+  //     route: '/' + post.slug,
+  //     payload: post
+  //   })
+  // })
 
-  // create author routes
-  const authors = await api.authors.browse({
-    fields: 'id,slug,name',
-    limit: 'all'
-  })
+  // // get pages
+  // const pages = await api.pages.browse({
+  //   fields: 'title,slug,id',
+  //   limit: 'all',
+  //   order: 'name ASC' })
 
-  authors.forEach((author) => {
-    routes.push({
-      route: '/author/' + author.slug,
-      payload: author
-    })
-  })
+  // pages.forEach((page) => {
+  //   routes.push({
+  //     route: '/' + page.slug,
+  //     payload: page
+  //   })
+  // })
+
+  // // create tag routes
+  // const tags = await api.tags.browse({
+  //   fields: 'name,slug,id',
+  //   limit: 'all',
+  //   filter: 'visibility:public' })
+
+  // tags.forEach((tag) => {
+  //   routes.push({
+  //     route: '/tag/' + tag.slug,
+  //     payload: tag
+  //   })
+  // })
+
+  // // create author routes
+  // const authors = await api.authors.browse({
+  //   fields: 'id,slug,name',
+  //   limit: 'all'
+  // })
+
+  // authors.forEach((author) => {
+  //   routes.push({
+  //     route: '/author/' + author.slug,
+  //     payload: author
+  //   })
+  // })
 
   return routes
 }
