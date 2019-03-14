@@ -25,8 +25,7 @@ export const actions = {
     // use this for both static and universal apps
     const posts = await ghostAPI().posts.browse({
       limit: 'all',
-      fields: 'slug,title',
-      order: 'published_at DESC'
+      fields: 'slug,title'
     })
 
     // append next and previous slugs (for links in a post) to next and previous posts

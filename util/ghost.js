@@ -50,11 +50,36 @@ const generateRoutes = async () => {
     nextPage = posts.meta.pagination.next
   } while (nextPage)
 
+  // get posts with full post data
+  // also append previous/next navigation
+  const posts = await ghostAPI().posts.browse({
+    limit: 'all',
+    include: 'authors,tags'
+  })
+
+  // append next and previous slugs (for links in a post) to next and previous posts
+  const postsWithLinks = posts.map((post, index) => {
+    const prevSlug = posts[index - 1] ? posts[index - 1].slug : null
+    const nextSlug = posts[index + 1] ? posts[index + 1].slug : null
+
+    return {
+      ...post,
+      prevSlug,
+      nextSlug
+    }
+  })
+
+  postsWithLinks.forEach((post) => {
+    routes.push({
+      route: '/' + post.slug,
+      payload: post
+    })
+  })
+
   // get pages
   const pages = await api.pages.browse({
     limit: 'all',
-    inlcude: 'authors,tags',
-    fields: indexPostFields
+    inlcude: 'authors,tags'
   })
 
   pages.forEach((page) => {
