@@ -50,18 +50,19 @@ const generateRoutes = async () => {
     nextPage = posts.meta.pagination.next
   } while (nextPage)
 
-  // // get pages
-  // const pages = await api.pages.browse({
-  //   fields: 'title,slug,id',
-  //   limit: 'all',
-  //   order: 'name ASC' })
+  // get pages
+  const pages = await api.pages.browse({
+    limit: 'all',
+    inlcude: 'authors,tags',
+    fields: indexPostFields
+  })
 
-  // pages.forEach((page) => {
-  //   routes.push({
-  //     route: '/' + page.slug,
-  //     payload: page
-  //   })
-  // })
+  pages.forEach((page) => {
+    routes.push({
+      route: '/' + page.slug,
+      payload: page
+    })
+  })
 
   // // create tag routes
   // const tags = await api.tags.browse({
