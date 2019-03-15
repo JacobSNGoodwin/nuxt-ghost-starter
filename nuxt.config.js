@@ -66,6 +66,18 @@ export default {
     routes: generateRoutes
   },
   /*
+  ** Extend routes so multiple routes can use same component
+  */
+  router: {
+    extendRoutes(routes, resolve) {
+      routes.push({
+        name: 'PostIndex',
+        path: '/page/:pageNumber',
+        component: resolve(__dirname, 'pages/index.vue')
+      })
+    }
+  },
+  /*
   ** Build configuration
   */
   build: {

@@ -34,10 +34,14 @@ export default {
     if (payload) {
       store.commit('setIndexPosts', payload)
     } else {
+      let pageNumber = 1
+      if (params.pageNumber) {
+        pageNumber = params.pageNumber
+      }
       // remember to use await here so data will be available
       await store.dispatch('getIndexPosts', {
         tag: null,
-        pageNumber: 1
+        pageNumber: pageNumber
       })
     }
   }
