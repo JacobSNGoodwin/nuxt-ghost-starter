@@ -28,6 +28,9 @@ export default {
     },
     siteSettings() {
       return this.$store.state.siteSettings
+    },
+    currentAuthor() {
+      return this.$store.state.siteAuthors.find(author => author.slug === this.$route.params.slug)
     }
   },
   async fetch({ params, store, error, payload }) {

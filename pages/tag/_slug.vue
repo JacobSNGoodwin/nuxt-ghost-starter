@@ -28,6 +28,9 @@ export default {
     },
     siteSettings() {
       return this.$store.state.siteSettings
+    },
+    currentTag() {
+      return this.$store.state.siteTags.find(tag => tag.slug === this.$route.params.slug)
     }
   },
   async fetch({ params, store, error, payload }) {
