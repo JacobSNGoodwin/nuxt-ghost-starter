@@ -1,6 +1,8 @@
-# nuxt-jsng
+# nuxt-ghost-starter
 
 > Static site using ghost content API and nuxt
+> Site provides ghost blog data to nuxt components
+> With data already provided, a site can be rapidly templated
 
 ## Build Setup
 
