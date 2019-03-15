@@ -5,7 +5,9 @@ export const state = () => ({
   indexPosts: [],
   indexPagination: [],
   currentPost: null,
-  siteSettings: null
+  siteSettings: null,
+  siteTags: null,
+  siteAuthors: null
 })
 
 export const mutations = {
@@ -21,6 +23,12 @@ export const mutations = {
   },
   setSiteSettings(state, siteSettings) {
     state.siteSettings = siteSettings
+  },
+  setSiteTags(state, siteTags) {
+    state.siteTags = siteTags
+  },
+  setSiteAuthors(state, siteAuthors) {
+    state.siteAuthors = siteAuthors
   }
 }
 
@@ -32,6 +40,9 @@ export const actions = {
       limit: 'all',
       fields: 'slug,title'
     })
+
+    const tags = await ghostAPI().tags.browse({ limit: 'all' })
+    const authors = await ghostAPI().authors.browse({ limit: 'all' })
 
     // append next and previous slugs (for links in a post) to next and previous posts
     const postsWithLinks = posts.map((post, index) => {
@@ -49,6 +60,8 @@ export const actions = {
 
     commit('setPostNav', postsWithLinks)
     commit('setSiteSettings', settings)
+    commit('setSiteTags', tags)
+    commit('setSiteAuthors', authors)
   },
   async getIndexPosts({ commit }, pagination) {
     // set desired fields for index lists (and tags/authors indices)
