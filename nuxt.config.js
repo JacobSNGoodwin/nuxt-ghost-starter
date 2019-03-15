@@ -29,7 +29,8 @@ export default {
   ** Global CSS
   */
   css: [
-    '@/assets/css/main.scss'
+    '@/assets/css/main.scss',
+    '@mdi/font/css/materialdesignicons.min.css'
   ],
 
   /*
