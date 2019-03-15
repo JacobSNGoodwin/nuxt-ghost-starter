@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'PostIndex',
+  name: 'AuthorIndex',
   computed: {
     indexPosts() {
       return this.$store.state.indexPosts
@@ -28,6 +28,9 @@ export default {
     },
     siteSettings() {
       return this.$store.state.siteSettings
+    },
+    currentAuthor() {
+      return this.$store.state.siteAuthors.find(author => author.slug === this.$route.params.slug)
     }
   },
   async fetch({ params, store, error, payload }) {
@@ -40,7 +43,7 @@ export default {
       }
       // remember to use await here so data will be available
       await store.dispatch('getIndexPosts', {
-        filter: '',
+        filter: 'author:' + params.slug,
         pageNumber: pageNumber
       })
     }

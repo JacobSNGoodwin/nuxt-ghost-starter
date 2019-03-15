@@ -29,6 +29,7 @@ export default {
   ** Global CSS
   */
   css: [
+    '@/assets/css/main.scss'
   ],
 
   /*
@@ -44,15 +45,12 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     // '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    '@nuxtjs/bulma',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    'nuxt-purgecss'
   ],
-  /*
-  ** Axios module configuration
-  */
-  // axios: {
-  //   // See https://github.com/nuxt-community/axios-module#options
-  // },
+  purgeCSS: {
+    // your settings here
+  },
   env: {
     // loaded from .env file locally and from netlify in deployment
     ghostUri: process.env.GHOST_URI,
@@ -68,12 +66,37 @@ export default {
     routes: generateRoutes
   },
   /*
+  ** Extend routes so multiple routes can use same component
+  */
+  router: {
+    extendRoutes(routes, resolve) {
+      routes.push({
+        name: 'PostIndex',
+        path: '/page/:pageNumber',
+        component: resolve(__dirname, 'pages/index.vue')
+      })
+
+      routes.push({
+        name: 'TagIndex',
+        path: '/tag/:slug/page/:pageNumber',
+        component: resolve(__dirname, 'pages/tag/_slug.vue')
+      })
+
+      routes.push({
+        name: 'AuthorIndex',
+        path: '/author/:slug/page/:pageNumber',
+        component: resolve(__dirname, 'pages/author/_slug.vue')
+      })
+    }
+  },
+  /*
   ** Build configuration
   */
   build: {
     // babel: {
     //   presets: ['@nuxt/babel-preset-app']
     // },
+    extractCSS: true,
     postcss: {
       preset: {
         features: {
