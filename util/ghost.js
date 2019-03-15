@@ -76,7 +76,9 @@ const generateRoutes = async () => {
     })
   })
 
-  // get pages
+  /*
+  ** get pages
+  */
   const pages = await api.pages.browse({
     limit: 'all',
     inlcude: 'authors,tags'
@@ -89,31 +91,81 @@ const generateRoutes = async () => {
     })
   })
 
-  // // create tag routes
-  // const tags = await api.tags.browse({
-  //   fields: 'name,slug,id',
-  //   limit: 'all',
-  //   filter: 'visibility:public' })
+  /*
+  ** create tag index routes
+  */
 
-  // tags.forEach((tag) => {
-  //   routes.push({
-  //     route: '/tag/' + tag.slug,
-  //     payload: tag
-  //   })
-  // })
+  const tags = await api.tags.browse({
+    fields: 'name,slug,id',
+    limit: 'all',
+    filter: 'visibility:public' })
 
-  // // create author routes
-  // const authors = await api.authors.browse({
-  //   fields: 'id,slug,name',
-  //   limit: 'all'
-  // })
+  // get route page for tag and pagination - must use for of loop
+  // to work with async/await
+  for (const tag of tags) {
+    let nextPage = 1
+    do {
+      const posts = await api.posts.browse({
+        limit: perPage,
+        page: nextPage,
+        inlcude: 'authors,tags',
+        fields: indexPostFields,
+        filter: `tag:${tag.slug}`
+      })
+      if (nextPage === 1) {
+        // push first PER_PAGE posts info to index
+        // we may want to pick a limited set of info in the future
+        routes.push({
+          route: '/tag/' + tag.slug,
+          payload: posts
+        })
+      } else {
+        routes.push({
+          route: '/tag/' + tag.slug + '/page/' + posts.meta.pagination.page,
+          payload: posts
+        })
+      }
+      nextPage = posts.meta.pagination.next
+    } while (nextPage)
+  }
 
-  // authors.forEach((author) => {
-  //   routes.push({
-  //     route: '/author/' + author.slug,
-  //     payload: author
-  //   })
-  // })
+  /*
+  ** create author index routes
+  */
+
+  const authors = await api.authors.browse({
+    fields: 'name,slug,id',
+    limit: 'all'
+  })
+
+  // get route page for tag and pagination - must use for of loop
+  // to work with async/await
+  for (const author of authors) {
+    let nextPage = 1
+    do {
+      const posts = await api.posts.browse({
+        limit: perPage,
+        page: nextPage,
+        inlcude: 'authors,tags',
+        fields: indexPostFields,
+        filter: `author:${author.slug}`
+      })
+      if (nextPage === 1) {
+        // push first PER_PAGE posts info to index
+        // we may want to pick a limited set of info in the future
+        routes.push({
+          route: '/author/' + author.slug,
+          payload: posts
+        })
+      } else {
+        routes.push({
+          route: '/author/' + author.slug + '/page/' + posts.meta.pagination.page,
+          payload: posts
+        })
+      }
+      nextPage = posts.meta.pagination.next
+    } while (nextPage)
+  }
 
   return routes
 }
