@@ -23,6 +23,9 @@ export default {
     indexPosts() {
       return this.$store.state.indexPosts
     },
+    indexPagination() {
+      return this.$store.state.indexPagination
+    },
     siteSettings() {
       return this.$store.state.siteSettings
     }

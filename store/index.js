@@ -3,6 +3,7 @@ import { ghostAPI, indexPostFields } from '@/util/ghost'
 export const state = () => ({
   postNav: [],
   indexPosts: [],
+  indexPagination: [],
   currentPost: null,
   siteSettings: null
 })
@@ -13,7 +14,7 @@ export const mutations = {
   },
   setIndexPosts(state, indexPosts) {
     state.indexPosts = indexPosts
-    // console.log(state.indexPosts)
+    state.indexPagination = indexPosts.meta.pagination
   },
   setCurrentPost(state, currentPost) {
     state.currentPost = currentPost
