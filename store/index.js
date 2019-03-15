@@ -52,13 +52,13 @@ export const actions = {
   },
   async getIndexPosts({ commit }, pagination) {
     // set desired fields for index lists (and tags/authors indices)
-    // if no pageNumber provided in route param, set to 1
 
     const posts = await ghostAPI().posts.browse({
       limit: process.env.POSTS_PER_PAGE,
       page: pagination.pageNumber,
       inlcude: 'authors,tags',
-      fields: indexPostFields
+      fields: indexPostFields,
+      filter: pagination.filter
     })
 
     commit('setIndexPosts', posts)

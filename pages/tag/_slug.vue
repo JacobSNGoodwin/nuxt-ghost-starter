@@ -40,7 +40,7 @@ export default {
       }
       // remember to use await here so data will be available
       await store.dispatch('getIndexPosts', {
-        filter: '',
+        filter: 'tag:' + params.slug,
         pageNumber: pageNumber
       })
     }

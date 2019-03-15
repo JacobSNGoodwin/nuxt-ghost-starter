@@ -1,5 +1,49 @@
 <template>
   <section class="section">
-    <h1>An author name</h1>
+    <div class="container">
+      <h1 class="title is-1 has-text-centered">
+        {{ siteSettings.title }}
+      </h1>
+      <h2 class="subtitle has-text-centered">
+        {{ siteSettings.description }}
+      </h2>
+      <ul>
+        <li v-for="post in indexPosts" :key="post.uuid">
+          {{ post.title }}
+        </li>
+      </ul>
+    </div>
   </section>
 </template>
+
+<script>
+export default {
+  name: 'PostIndex',
+  computed: {
+    indexPosts() {
+      return this.$store.state.indexPosts
+    },
+    indexPagination() {
+      return this.$store.state.indexPagination
+    },
+    siteSettings() {
+      return this.$store.state.siteSettings
+    }
+  },
+  async fetch({ params, store, error, payload }) {
+    if (payload) {
+      store.commit('setIndexPosts', payload)
+    } else {
+      let pageNumber = 1
+      if (params.pageNumber) {
+        pageNumber = params.pageNumber
+      }
+      // remember to use await here so data will be available
+      await store.dispatch('getIndexPosts', {
+        filter: 'author:' + params.slug,
+        pageNumber: pageNumber
+      })
+    }
+  }
+}
+</script>
