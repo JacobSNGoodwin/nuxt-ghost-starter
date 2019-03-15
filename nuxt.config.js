@@ -75,6 +75,18 @@ export default {
         path: '/page/:pageNumber',
         component: resolve(__dirname, 'pages/index.vue')
       })
+
+      routes.push({
+        name: 'TagIndex',
+        path: '/tag/:slug/page/:pageNumber',
+        component: resolve(__dirname, 'pages/tag/_slug.vue')
+      })
+
+      routes.push({
+        name: 'AuthorIndex',
+        path: '/author/:slug/page/:pageNumber',
+        component: resolve(__dirname, 'pages/author/_slug.vue')
+      })
     }
   },
   /*

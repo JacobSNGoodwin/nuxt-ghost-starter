@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'PostIndex',
+  name: 'AuthorIndex',
   computed: {
     indexPosts() {
       return this.$store.state.indexPosts
