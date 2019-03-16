@@ -11,6 +11,18 @@ const ghost = (url, key) => {
 
 const postsPerPage = 5
 
+const postIndexFields = [
+  'id',
+  'uuid',
+  'title',
+  'slug',
+  'feature_image',
+  'featured',
+  'published_at',
+  'custom_excerpt',
+  'excerpt' // excerpt doesn't seem to work in field definition (bug?)
+]
+
 const generateRoutes = async () => {
   const host = process.env.GHOST_URI
   const key = process.env.GHOST_KEY
@@ -30,7 +42,8 @@ const generateRoutes = async () => {
     const posts = await api.posts.browse({
       limit: postsPerPage,
       page: nextPage,
-      inlcude: 'authors,tags'
+      fields: postIndexFields,
+      include: 'authors,tags'
     })
     if (nextPage === 1) {
       // push first PER_PAGE posts info to index
@@ -171,4 +184,4 @@ const ghostAPI = () => {
   return ghost(process.env.GHOST_URI, process.env.GHOST_KEY)
 }
 
-export { ghostAPI, generateRoutes, postsPerPage }
+export { ghostAPI, generateRoutes, postsPerPage, postIndexFields }
