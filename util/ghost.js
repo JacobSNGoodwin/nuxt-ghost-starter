@@ -9,7 +9,6 @@ const ghost = (url, key) => {
   })
 }
 
-const indexPostFields = ['id', 'uuid', 'title', 'slug', 'feature_image', 'featured', 'page', 'created_at', 'updated_at', 'published_at']
 const postsPerPage = 5
 
 const generateRoutes = async () => {
@@ -31,8 +30,7 @@ const generateRoutes = async () => {
     const posts = await api.posts.browse({
       limit: postsPerPage,
       page: nextPage,
-      inlcude: 'authors,tags',
-      fields: indexPostFields
+      inlcude: 'authors,tags'
     })
     if (nextPage === 1) {
       // push first PER_PAGE posts info to index
@@ -109,7 +107,6 @@ const generateRoutes = async () => {
         limit: postsPerPage,
         page: nextPage,
         inlcude: 'authors,tags',
-        fields: indexPostFields,
         filter: `tag:${tag.slug}`
       })
       if (nextPage === 1) {
@@ -147,7 +144,6 @@ const generateRoutes = async () => {
         limit: postsPerPage,
         page: nextPage,
         inlcude: 'authors,tags',
-        fields: indexPostFields,
         filter: `author:${author.slug}`
       })
       if (nextPage === 1) {
@@ -175,4 +171,4 @@ const ghostAPI = () => {
   return ghost(process.env.GHOST_URI, process.env.GHOST_KEY)
 }
 
-export { ghostAPI, generateRoutes, indexPostFields, postsPerPage }
+export { ghostAPI, generateRoutes, postsPerPage }

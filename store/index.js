@@ -1,4 +1,4 @@
-import { ghostAPI, indexPostFields, postsPerPage } from '@/util/ghost'
+import { ghostAPI, postsPerPage } from '@/util/ghost'
 
 export const state = () => ({
   postNav: [],
@@ -70,7 +70,6 @@ export const actions = {
       limit: postsPerPage,
       page: pagination.pageNumber,
       inlcude: 'authors,tags',
-      fields: indexPostFields,
       filter: pagination.filter
     })
 
