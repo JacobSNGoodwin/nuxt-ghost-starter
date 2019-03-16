@@ -10,11 +10,11 @@ const ghost = (url, key) => {
 }
 
 const indexPostFields = ['id', 'uuid', 'title', 'slug', 'feature_image', 'featured', 'page', 'created_at', 'updated_at', 'published_at']
+const postsPerPage = 5
 
 const generateRoutes = async () => {
   const host = process.env.GHOST_URI
   const key = process.env.GHOST_KEY
-  const perPage = process.env.POSTS_PER_PAGE
 
   const api = ghost(host, key)
 
@@ -29,7 +29,7 @@ const generateRoutes = async () => {
   let nextPage = 1
   do {
     const posts = await api.posts.browse({
-      limit: perPage,
+      limit: postsPerPage,
       page: nextPage,
       inlcude: 'authors,tags',
       fields: indexPostFields
@@ -106,7 +106,7 @@ const generateRoutes = async () => {
     let nextPage = 1
     do {
       const posts = await api.posts.browse({
-        limit: perPage,
+        limit: postsPerPage,
         page: nextPage,
         inlcude: 'authors,tags',
         fields: indexPostFields,
@@ -144,7 +144,7 @@ const generateRoutes = async () => {
     let nextPage = 1
     do {
       const posts = await api.posts.browse({
-        limit: perPage,
+        limit: postsPerPage,
         page: nextPage,
         inlcude: 'authors,tags',
         fields: indexPostFields,
@@ -175,4 +175,4 @@ const ghostAPI = () => {
   return ghost(process.env.GHOST_URI, process.env.GHOST_KEY)
 }
 
-export { ghostAPI, generateRoutes, indexPostFields }
+export { ghostAPI, generateRoutes, indexPostFields, postsPerPage }
