@@ -22,9 +22,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  a.navbar-item {
-    font-weight: 500;
-  }
-</style>
