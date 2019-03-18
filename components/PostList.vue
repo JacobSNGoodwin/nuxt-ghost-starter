@@ -45,7 +45,7 @@
     </nuxt-link>
     <div class="level is-mobile" role="navigation">
       <p v-if="pagination.prev" class="level-item has-text-centered">
-        <nuxt-link :to="'/page/' + pagination.prev" class="button is-info">
+        <nuxt-link :to="prevLink" class="button is-info">
           Prev
         </nuxt-link>
       </p>
@@ -53,7 +53,7 @@
         Page {{ pagination.page }} of {{ pagination.pages }}
       </p>
       <p v-if="pagination.next" class="level-item has-text-centered">
-        <nuxt-link :to="'/page/' + pagination.next" class="button is-info">
+        <nuxt-link :to="nextLink" class="button is-info">
           Next
         </nuxt-link>
       </p>
@@ -71,6 +71,23 @@ export default {
     pagination: {
       type: Object,
       required: true
+    },
+    indexBase: {
+      type: String,
+      required: false,
+      default: '/'
+    }
+  },
+  computed: {
+    prevLink() {
+      if (this.pagination.prev === 1) {
+        return this.indexBase
+      } else {
+        return this.indexBase + 'page/' + this.pagination.prev
+      }
+    },
+    nextLink() {
+      return this.indexBase + 'page/' + this.pagination.next
     }
   }
 }

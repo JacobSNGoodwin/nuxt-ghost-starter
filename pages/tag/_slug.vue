@@ -2,23 +2,23 @@
   <section class="section">
     <div class="container">
       <h1 class="title is-1 has-text-centered">
-        {{ siteSettings.title }}
+        {{ currentTag.name }}
       </h1>
       <h2 class="subtitle has-text-centered">
-        {{ siteSettings.description }}
+        {{ currentTag.description }}
       </h2>
-      <ul>
-        <li v-for="post in indexPosts" :key="post.uuid">
-          {{ post.title }}
-        </li>
-      </ul>
+      <PostList :posts="indexPosts" :pagination="indexPagination" :index-base="'/tag/' + currentTag.slug + '/'" />
     </div>
   </section>
 </template>
 
 <script>
+import PostList from '@/components/PostList.vue'
 export default {
   name: 'TagIndex',
+  components: {
+    PostList
+  },
   computed: {
     indexPosts() {
       return this.$store.state.indexPosts
