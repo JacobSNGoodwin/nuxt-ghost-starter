@@ -44,16 +44,16 @@
       </div>
     </nuxt-link>
     <div class="level is-mobile" role="navigation">
-      <p class="level-item has-text-centered">
-        <nuxt-link v-show="pagination.prev" :to="'/page/' + pagination.prev" class="button is-info">
+      <p v-if="pagination.prev" class="level-item has-text-centered">
+        <nuxt-link :to="'/page/' + pagination.prev" class="button is-info">
           Prev
         </nuxt-link>
       </p>
       <p class="level-item has-text-centered">
         Page {{ pagination.page }} of {{ pagination.pages }}
       </p>
-      <p class="level-item has-text-centered">
-        <nuxt-link v-if="pagination.next" :to="'/page/' + pagination.next" class="button is-info">
+      <p v-if="pagination.next" class="level-item has-text-centered">
+        <nuxt-link :to="'/page/' + pagination.next" class="button is-info">
           Next
         </nuxt-link>
       </p>
