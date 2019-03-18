@@ -43,12 +43,21 @@
         </div>
       </div>
     </nuxt-link>
-    <nuxt-link v-if="pagination.prev" :to="'/page/to/' + pagination.prev" class="button is-info">
-      {{ pagination.prev }}
-    </nuxt-link>
-    <nuxt-link v-if="pagination.next" :to="'/page/to/' + pagination.next" class="button is-info">
-      Page {{ pagination.next }}
-    </nuxt-link>
+    <div class="level is-mobile" role="navigation">
+      <p class="level-item has-text-centered">
+        <nuxt-link v-show="pagination.prev" :to="'/page/' + pagination.prev" class="button is-info">
+          Prev
+        </nuxt-link>
+      </p>
+      <p class="level-item has-text-centered">
+        Page {{ pagination.page }} of {{ pagination.pages }}
+      </p>
+      <p class="level-item has-text-centered">
+        <nuxt-link v-if="pagination.next" :to="'/page/' + pagination.next" class="button is-info">
+          Next
+        </nuxt-link>
+      </p>
+    </div>
   </div>
 </template>
 
