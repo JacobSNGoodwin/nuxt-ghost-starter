@@ -4,6 +4,7 @@
       <h1 class="title has-text-weight-bold has-text-centered has-text-primary">
         {{ post.title }}
       </h1>
+      <div class="post-content" v-html="post.html" />
     </div>
   </section>
 </template>
