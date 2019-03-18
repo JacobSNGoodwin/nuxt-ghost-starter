@@ -2,23 +2,20 @@
   <section class="section">
     <div class="container">
       <h1 class="title is-1 has-text-centered">
-        {{ siteSettings.title }}
+        {{ currentAuthor.name }}
       </h1>
-      <h2 class="subtitle has-text-centered">
-        {{ siteSettings.description }}
-      </h2>
-      <ul>
-        <li v-for="post in indexPosts" :key="post.uuid">
-          {{ post.title }}
-        </li>
-      </ul>
+      <PostList :posts="indexPosts" :pagination="indexPagination" :index-base="'/author/' + currentAuthor.slug + '/'" />
     </div>
   </section>
 </template>
 
 <script>
+import PostList from '@/components/PostList.vue'
 export default {
   name: 'AuthorIndex',
+  components: {
+    PostList
+  },
   computed: {
     indexPosts() {
       return this.$store.state.indexPosts
