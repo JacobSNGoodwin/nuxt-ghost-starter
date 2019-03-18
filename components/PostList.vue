@@ -13,7 +13,7 @@
               {{ post.title }}
             </h3>
             <p class="subtitle is-6 has-text-centered">
-              Published on
+              Published on {{ post.published_at | formatDate }}
             </p>
           </div>
           <div v-for="author in post.authors" :key="author.id">
