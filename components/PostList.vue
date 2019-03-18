@@ -45,6 +45,12 @@
         </div>
       </div>
     </nuxt-link>
+    <nuxt-link v-if="pagination.prev" :to="'/page/to/' + pagination.prev" class="button is-info">
+      {{ pagination.prev }}
+    </nuxt-link>
+    <nuxt-link v-if="pagination.next" :to="'/page/to/' + pagination.next" class="button is-info">
+      Page {{ pagination.next }}
+    </nuxt-link>
   </div>
 </template>
 
@@ -54,16 +60,16 @@ export default {
     posts: {
       type: Array,
       required: true
+    },
+    pagination: {
+      type: Object,
+      required: true
     }
   }
 }
 </script>
 
 <style scoped>
-  .column {
-    flex-wrap: wrap
-  }
-
   .card {
     margin: 1.5em 0 1.5em 0;
   }

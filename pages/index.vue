@@ -7,7 +7,7 @@
       <h2 class="subtitle has-text-centered">
         {{ siteSettings.description }}
       </h2>
-      <PostList :posts="indexPosts" />
+      <PostList :posts="indexPosts" :pagination="indexPagination" />
     </div>
   </section>
 </template>
