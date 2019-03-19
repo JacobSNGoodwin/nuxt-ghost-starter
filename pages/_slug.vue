@@ -4,7 +4,10 @@
       <h1 class="title has-text-weight-bold has-text-centered has-text-primary">
         {{ post.title }}
       </h1>
-      <div class="post-content" v-html="post.html" />
+      <figure v-if="post.feature_image" class="image post-feature-image">
+        <img :src="post.feature_image" alt="Post Image">
+      </figure>
+      <div class="content" v-html="post.html" />
     </div>
   </section>
 </template>
