@@ -7,7 +7,7 @@
       <figure v-if="post.feature_image" class="image post-feature-image">
         <img :src="post.feature_image" alt="Post Image">
       </figure>
-      <div class="content" v-html="post.html" />
+      <div ref="postContent" class="content" v-html="post.html" />
     </div>
   </section>
 </template>
@@ -26,6 +26,17 @@ export default {
     } else {
       // remember to use await here so data will be available
       await store.dispatch('getCurrentPost', params.slug)
+    }
+  },
+  mounted() {
+    // ghetto way of overcoming iFrame height "challenge/annoyance"
+    const cards = document.getElementsByClassName('kg-embed-card')
+    for (const card of cards) {
+      const iframe = card.firstElementChild
+      const iframeHeight = iframe.getAttribute('height')
+      if (iframeHeight) {
+        iframe.style.height = iframeHeight + 'px'
+      }
     }
   }
 }
