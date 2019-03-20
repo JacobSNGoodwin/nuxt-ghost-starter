@@ -3,8 +3,8 @@ import GhostContentAPI from '@tryghost/content-api'
 // we have this function accept variables to be accessible to config.js
 const ghost = (url, key) => {
   return new GhostContentAPI({
-    url,
-    key,
+    url: url,
+    key: key,
     version: 'v2'
   })
 }
@@ -24,6 +24,8 @@ const postIndexFields = [
 ]
 
 const generateRoutes = async () => {
+  // need to use env set in .env file or set on you server since this is called during nuxt config
+  // cannot use process.eng.ghostUri which is available after config
   const host = process.env.GHOST_URI
   const key = process.env.GHOST_KEY
 
@@ -63,7 +65,7 @@ const generateRoutes = async () => {
 
   // get posts with full post data
   // also append previous/next navigation
-  const posts = await ghostAPI().posts.browse({
+  const posts = await api.posts.browse({
     limit: 'all',
     include: 'authors,tags'
   })
@@ -181,7 +183,7 @@ const generateRoutes = async () => {
 
 const ghostAPI = () => {
   // called as function to make sure env variables are available
-  return ghost(process.env.GHOST_URI, process.env.GHOST_KEY)
+  return ghost(process.env.ghostUri, process.env.ghostKey)
 }
 
 export { ghostAPI, generateRoutes, postsPerPage, postIndexFields }
