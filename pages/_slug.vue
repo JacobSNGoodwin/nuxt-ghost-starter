@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <div class="container">
+    <div class="container post-container">
       <h1 class="title has-text-weight-bold has-text-centered has-text-primary">
         {{ post.title }}
       </h1>
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="scss">
-.container {
+.post-container {
   display: flex;
   flex-direction: column;
 
