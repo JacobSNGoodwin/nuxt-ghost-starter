@@ -1,13 +1,13 @@
 <template>
   <section class="section">
-    <div class="container">
+    <div class="container is-widescreen">
       <h1 class="title has-text-weight-bold has-text-centered has-text-primary">
         {{ post.title }}
       </h1>
       <figure v-if="post.feature_image" class="image post-feature-image">
         <img :src="post.feature_image" alt="Post Image">
       </figure>
-      <div ref="postContent" class="content" v-html="post.html" />
+      <article ref="postContent" class="content post-content" v-html="post.html" />
     </div>
   </section>
 </template>

@@ -19,11 +19,39 @@ $navbar-burger-color: $info;
   }
 }
 
-.post-feature-image {
-  margin-bottom: 2em;
-}
-  
-.instagram-media {
-  margin: auto !important; // instagram is weird for some reason
+.post-content {
+  display: flex;
+  flex-direction: column;
+
+  .instagram-media, .instagram-media-rendered {
+    margin: auto !important;
+  }
+
+  .kg-image-card {
+    align-self: center;
+    img {
+      max-width: 75vw;
+    }
+  }
+
+  .kg-width-wide {
+    align-self: center;
+    img {
+      max-width: 85vw;
+    }
+  }
+
+  .kg-width-full {
+    align-self: center;
+    img {
+      max-width: 100vw;
+    }
+  }
+
+  p {
+    img {
+      text-align: center;
+    }
+  }
 }
 
