@@ -4,6 +4,7 @@
 // Add customization here
 $fullhd-enabled: false;
 $widescreen-enabled: false;
+$section-padding: 3em 2em;
 $primary: rgb(14, 45, 77);
 $info: rgb(232, 75, 13);
 $link: rgb(232, 75, 13);
@@ -19,6 +20,20 @@ $navbar-burger-color: $info;
   }
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+
+  .post-feature-image {
+    align-self: center;
+    margin-bottom: 2em;
+    img {
+      max-width: 100vw;
+    }
+  }
+  
+}
+
 .post-content {
   display: flex;
   flex-direction: column;
@@ -32,32 +47,29 @@ $navbar-burger-color: $info;
     img {
       max-width: 75vw;
     }
+    figcaption {
+      padding: 0 2em;
+    }
   }
 
   .kg-width-wide {
-    align-self: center;
     img {
       max-width: 85vw;
     }
   }
 
   .kg-width-full {
-    align-self: center;
     img {
       max-width: 100vw;
     }
   }
 
   p {
+    align-self: center;
     img {
-      text-align: center;
+      display: block;
+      margin: 1em auto;
+      max-width: 100vw;
     }
-  }
-}
-
-.content {
-  img {
-    display: block;
-    margin: auto;
   }
 }

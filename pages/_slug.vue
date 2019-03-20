@@ -1,10 +1,10 @@
 <template>
   <section class="section">
-    <div class="container is-widescreen">
+    <div class="container">
       <h1 class="title has-text-weight-bold has-text-centered has-text-primary">
         {{ post.title }}
       </h1>
-      <figure v-if="post.feature_image" class="image post-feature-image">
+      <figure v-if="post.feature_image" class="post-feature-image">
         <img :src="post.feature_image" alt="Post Image">
       </figure>
       <article ref="postContent" class="content post-content" v-html="post.html" />
