@@ -1,4 +1,4 @@
-import { ghostAPI, indexPostFields } from '@/util/ghost'
+import { ghostAPI, postsPerPage, postIndexFields } from '@/util/ghost'
 
 export const state = () => ({
   postNav: [],
@@ -67,10 +67,10 @@ export const actions = {
     // set desired fields for index lists (and tags/authors indices)
 
     const posts = await ghostAPI().posts.browse({
-      limit: process.env.POSTS_PER_PAGE,
+      limit: postsPerPage,
       page: pagination.pageNumber,
-      inlcude: 'authors,tags',
-      fields: indexPostFields,
+      include: 'tags,authors',
+      fields: postIndexFields,
       filter: pagination.filter
     })
 
@@ -85,14 +85,14 @@ export const actions = {
       // TODO: catch errors
       const page = await ghostAPI().pages.read({
         slug,
-        include: 'authors, tags'
+        include: 'tags,authors'
       })
 
       commit('setCurrentPost', page)
     } else {
       const post = await ghostAPI().posts.read({
         slug,
-        include: 'authors,tags'
+        include: 'tags,authors'
       })
 
       commit('setCurrentPost', {

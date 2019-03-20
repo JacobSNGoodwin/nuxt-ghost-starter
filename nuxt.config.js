@@ -29,13 +29,15 @@ export default {
   ** Global CSS
   */
   css: [
-    '@/assets/css/main.scss'
+    '@/assets/css/main.scss',
+    '@mdi/font/css/materialdesignicons.min.css'
   ],
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~plugins/filters.js'
   ],
 
   /*
@@ -48,9 +50,6 @@ export default {
     '@nuxtjs/dotenv',
     'nuxt-purgecss'
   ],
-  purgeCSS: {
-    // your settings here
-  },
   env: {
     // loaded from .env file locally and from netlify in deployment
     ghostUri: process.env.GHOST_URI,
@@ -89,21 +88,18 @@ export default {
       })
     }
   },
+  purgecss: {},
   /*
   ** Build configuration
   */
   build: {
-    // babel: {
-    //   presets: ['@nuxt/babel-preset-app']
-    // },
     extractCSS: true,
-    postcss: {
-      preset: {
-        features: {
-          customProperties: false
-        }
-      }
-    },
+    // postcss: {
+    //   preset: {
+    //     features: {
+    //       customProperties: true
+    //     }
+    //   }
     // },
     extend(config, ctx) {
       // Run ESLint on save

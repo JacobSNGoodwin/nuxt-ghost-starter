@@ -7,18 +7,18 @@
       <h2 class="subtitle has-text-centered">
         {{ siteSettings.description }}
       </h2>
-      <ul>
-        <li v-for="post in indexPosts" :key="post.uuid">
-          {{ post.title }}
-        </li>
-      </ul>
+      <PostList :posts="indexPosts" :pagination="indexPagination" />
     </div>
   </section>
 </template>
 
 <script>
+import PostList from '@/components/PostList.vue'
 export default {
   name: 'PostIndex',
+  components: {
+    PostList
+  },
   computed: {
     indexPosts() {
       return this.$store.state.indexPosts

@@ -84,3 +84,5 @@ dist
 sw.*
 .env.dev.local
 .env.dev
+
+.tmp
