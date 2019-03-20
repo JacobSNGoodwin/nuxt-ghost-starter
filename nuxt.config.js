@@ -50,9 +50,6 @@ export default {
     '@nuxtjs/dotenv',
     'nuxt-purgecss'
   ],
-  purgeCSS: {
-    // your settings here
-  },
   env: {
     // loaded from .env file locally and from netlify in deployment
     ghostUri: process.env.GHOST_URI,
@@ -91,18 +88,19 @@ export default {
       })
     }
   },
+  purgecss: {},
   /*
   ** Build configuration
   */
   build: {
     extractCSS: true,
-    postcss: {
-      preset: {
-        features: {
-          customProperties: false
-        }
-      }
-    },
+    // postcss: {
+    //   preset: {
+    //     features: {
+    //       customProperties: true
+    //     }
+    //   }
+    // },
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {

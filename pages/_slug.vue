@@ -41,3 +41,59 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.container {
+  display: flex;
+  flex-direction: column;
+
+  .post-feature-image {
+    align-self: center;
+    margin-bottom: 2em;
+    img {
+      max-width: 100vw;
+    }
+  }
+
+}
+
+.post-content {
+  display: flex;
+  flex-direction: column;
+
+  .instagram-media, .instagram-media-rendered {
+    margin: auto !important;
+  }
+
+  .kg-image-card {
+    align-self: center;
+    .kg-image {
+      max-width: 75vw;
+    }
+    figcaption {
+      padding: 0 2em;
+    }
+  }
+
+  .kg-width-wide {
+    .kg-image {
+      max-width: 85vw;
+    }
+  }
+
+  .kg-width-full {
+    .kg-image {
+      max-width: 100vw;
+    }
+  }
+
+  p {
+    align-self: center;
+    img {
+      display: block;
+      margin: 1em auto;
+      max-width: 100vw;
+    }
+  }
+}
+</style>
