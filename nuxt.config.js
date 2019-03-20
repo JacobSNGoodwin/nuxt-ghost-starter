@@ -95,9 +95,6 @@ export default {
   ** Build configuration
   */
   build: {
-    // babel: {
-    //   presets: ['@nuxt/babel-preset-app']
-    // },
     extractCSS: true,
     postcss: {
       preset: {
@@ -106,7 +103,6 @@ export default {
         }
       }
     },
-    // },
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
