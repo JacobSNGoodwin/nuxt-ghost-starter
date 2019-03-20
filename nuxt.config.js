@@ -62,6 +62,7 @@ export default {
   * Generate dynamic routes for static site generations
   */
   generate: {
+    fallback: true,
     routes: generateRoutes
   },
   /*
