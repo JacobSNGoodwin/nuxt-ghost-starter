@@ -27,3 +27,9 @@ $navbar-burger-color: $info;
   margin: auto !important; // instagram is weird for some reason
 }
 
+.content {
+  img {
+    display: block;
+    margin: auto;
+  }
+}
