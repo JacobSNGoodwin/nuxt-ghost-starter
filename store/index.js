@@ -33,37 +33,41 @@ export const mutations = {
 }
 
 export const actions = {
-  async nuxtServerInit({ commit }) {
+  async nuxtServerInit({ commit, error }) {
     // get site settings, and whether or not posts have a previous or next post
     // use this for both static and universal apps
-    const settings = await ghostAPI().settings.browse()
-    const tags = await ghostAPI().tags.browse({ limit: 'all' })
-    const authors = await ghostAPI().authors.browse({ limit: 'all' })
-    const posts = await ghostAPI().posts.browse({
-      limit: 'all',
-      fields: 'slug,title'
-    })
+    try {
+      const settings = await ghostAPI().settings.browse()
+      const tags = await ghostAPI().tags.browse({ limit: 'all' })
+      const authors = await ghostAPI().authors.browse({ limit: 'all' })
+      const posts = await ghostAPI().posts.browse({
+        limit: 'all',
+        fields: 'slug,title'
+      })
 
-    // append next and previous slugs (for links in a post) to next and previous posts
-    const postsWithLinks = posts.map((post, index) => {
-      const prevSlug = posts[index - 1] ? posts[index - 1].slug : null
-      const nextSlug = posts[index + 1] ? posts[index + 1].slug : null
+      // append next and previous slugs (for links in a post) to next and previous posts
+      const postsWithLinks = posts.map((post, index) => {
+        const prevSlug = posts[index - 1] ? posts[index - 1].slug : null
+        const nextSlug = posts[index + 1] ? posts[index + 1].slug : null
 
-      return {
-        ...post,
-        prevSlug,
-        nextSlug
-      }
-    })
+        return {
+          ...post,
+          prevSlug,
+          nextSlug
+        }
+      })
 
-    commit('setSiteSettings', settings)
-    commit('setSiteTags', tags)
-    commit('setSiteAuthors', authors)
-    commit('setPostNav', postsWithLinks)
+      commit('setSiteSettings', settings)
+      commit('setSiteTags', tags)
+      commit('setSiteAuthors', authors)
+      commit('setPostNav', postsWithLinks)
+    } catch (e) {
+      // since this is server init, the error would be a server error
+      error({ statusCode: 500, message: e.message })
+    }
   },
   async getIndexPosts({ commit }, pagination) {
     // set desired fields for index lists (and tags/authors indices)
-
     const posts = await ghostAPI().posts.browse({
       limit: postsPerPage,
       page: pagination.pageNumber,
@@ -71,7 +75,6 @@ export const actions = {
       fields: postIndexFields,
       filter: pagination.filter
     })
-
     commit('setIndexPosts', posts)
   }
 }
