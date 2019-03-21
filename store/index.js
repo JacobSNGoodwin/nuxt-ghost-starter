@@ -36,13 +36,13 @@ export const actions = {
   async nuxtServerInit({ commit }) {
     // get site settings, and whether or not posts have a previous or next post
     // use this for both static and universal apps
+    const settings = await ghostAPI().settings.browse()
+    const tags = await ghostAPI().tags.browse({ limit: 'all' })
+    const authors = await ghostAPI().authors.browse({ limit: 'all' })
     const posts = await ghostAPI().posts.browse({
       limit: 'all',
       fields: 'slug,title'
     })
-
-    const tags = await ghostAPI().tags.browse({ limit: 'all' })
-    const authors = await ghostAPI().authors.browse({ limit: 'all' })
 
     // append next and previous slugs (for links in a post) to next and previous posts
     const postsWithLinks = posts.map((post, index) => {
@@ -56,12 +56,10 @@ export const actions = {
       }
     })
 
-    const settings = await ghostAPI().settings.browse()
-
-    commit('setPostNav', postsWithLinks)
     commit('setSiteSettings', settings)
     commit('setSiteTags', tags)
     commit('setSiteAuthors', authors)
+    commit('setPostNav', postsWithLinks)
   },
   async getIndexPosts({ commit }, pagination) {
     // set desired fields for index lists (and tags/authors indices)

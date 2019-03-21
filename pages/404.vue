@@ -1,10 +1,7 @@
 <template>
   <div class="error-container">
-    <h1 v-if="error.statusCode === 404" class="title is-1 has-text-centered">
+    <h1 class="title is-1 has-text-centered">
       Page not found
-    </h1>
-    <h1 v-else class="title is-1 has-text-centered">
-      An error occurred
     </h1>
     <div class="buttons is-centered">
       <nuxt-link to="/" tag="a" class="button is-info">

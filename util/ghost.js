@@ -35,6 +35,16 @@ const generateRoutes = async () => {
   const routes = []
 
   /*
+  ** 404 page with access to site settings for navigation
+  */
+
+  const settings = await api.settings.browse()
+  routes.push({
+    route: '/404',
+    payload: settings
+  })
+
+  /*
   *
   * Create post index pages (with only subset of post data)
   *
