@@ -41,11 +41,17 @@ export default {
       if (params.pageNumber) {
         pageNumber = params.pageNumber
       }
-      // remember to use await here so data will be available
-      await store.dispatch('getIndexPosts', {
-        filter: 'tag:' + params.slug,
-        pageNumber: pageNumber
-      })
+
+      try {
+        // remember to use await here so data will be available
+        await store.dispatch('getIndexPosts', {
+          filter: 'tag:' + params.slug,
+          pageNumber: pageNumber
+        })
+      } catch (e) {
+        // as far as user is concerned this isn't an API failure
+        error({ statusCode: 404, message: e.message })
+      }
     }
   }
 }
