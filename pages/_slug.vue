@@ -21,6 +21,11 @@ export default {
       return this.$store.state.currentPost
     }
   },
+  head() {
+    return {
+      title: this.post.title
+    }
+  },
   async fetch({ params, store, error, payload }) {
     if (payload) {
       store.commit('setCurrentPost', payload)
