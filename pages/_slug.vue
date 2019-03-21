@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { ghostAPI } from '@/util/ghost'
 export default {
   name: 'PostPage',
   computed: {
@@ -25,7 +26,39 @@ export default {
       store.commit('setCurrentPost', payload)
     } else {
       // remember to use await here so data will be available
-      await store.dispatch('getCurrentPost', params.slug)
+      // await store.dispatch('getCurrentPost', params.slug)
+      const postLinks = store.state.postNav.find(post => post.slug === params.slug)
+
+      if (!postLinks) {
+      // if it's not in lists of posts check for page
+      // TODO: catch errors
+        try {
+          const page = await ghostAPI().pages.read({
+            slug: params.slug,
+            include: 'tags,authors'
+          })
+          store.commit('setCurrentPost', page)
+        } catch (e) {
+          // forward error - just call all errors 404
+          // since user doesn't need to know about content API
+          error({ statusCode: 404, message: e.message })
+        }
+      } else {
+        try {
+          const post = await ghostAPI().posts.read({
+            slug: params.slug,
+            include: 'tags,authors'
+          })
+
+          store.commit('setCurrentPost', {
+            ...post,
+            prevSlug: postLinks.prevSlug,
+            nextSlug: postLinks.nextSlug
+          })
+        } catch (e) {
+          error({ statusCode: 404, message: e.message })
+        }
+      }
     }
   },
   mounted() {
