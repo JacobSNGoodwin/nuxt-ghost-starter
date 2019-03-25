@@ -9,12 +9,18 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    // title: pkg.name,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: pkg.description }
     ]
+  },
+  /*
+  ** Add overriding info for meta items
+  */
+  meta: {
+    name: 'JSNG' // this is needed to change title for all PWA meta tags
   },
 
   /*
