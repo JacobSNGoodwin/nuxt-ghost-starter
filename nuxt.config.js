@@ -9,21 +9,24 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    // title: pkg.name,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: pkg.description }
-    ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
+  },
+  /*
+  ** Add overriding info for meta items
+  */
+  meta: {
+    name: 'JSNG' // this is needed to change title for all PWA meta tags
   },
 
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: { color: '#e84b0d' },
 
   /*
   ** Global CSS
@@ -53,7 +56,8 @@ export default {
   env: {
     // loaded from .env file locally and from netlify in deployment
     ghostUri: process.env.GHOST_URI,
-    ghostKey: process.env.GHOST_KEY
+    ghostKey: process.env.GHOST_KEY,
+    siteUrl: 'https://relaxed-panini-623754.netlify.com'
   },
   workbox: {
     dev: false
