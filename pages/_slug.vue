@@ -19,11 +19,29 @@ export default {
   computed: {
     post() {
       return this.$store.state.currentPost
+    },
+    siteSettings() {
+      return this.$store.state.siteSettings
     }
   },
   head() {
     return {
-      title: this.post.title
+      title: this.post.title,
+      meta: [
+        { hid: 'description', name: 'description', content: this.post.description },
+        { hid: 'og:type', property: 'og:type', content: 'article' },
+        { hid: 'og:title', property: 'og:title', content: this.post.og_title || this.post.meta_title },
+        { hid: 'og:description', property: 'og:description', content: this.post.og_description || this.post.meta_description },
+        { hid: 'og:image', property: 'og:image', content: this.post.og_image || this.post.feature_image },
+        { hid: 'og:url', property: 'og:url', content: process.env.siteUrl + this.$route.path },
+        { hid: 'twitter:title', name: 'twitter:title', content: this.post.twitter_title || this.post.meta_title },
+        { hid: 'twitter:description', name: 'twitter:description', content: this.post.twitter_description || this.post.meta_description },
+        { hid: 'twitter:image', name: 'twitter:image', content: this.post.twitter_image || this.post.feature_image },
+        { hid: 'twitter:url', name: 'twitter:url', content: process.env.siteUrl + this.$route.path },
+        { hid: 'twitter:creator', name: 'twitter:creator', content: this.post.primary_author.twitter },
+        { hid: 'twitter:label1', name: 'twitter:label1', content: 'Written by' },
+        { hid: 'twitter:data1', name: 'twitter:data1', content: this.post.primary_author.name }
+      ]
     }
   },
   async fetch({ params, store, error, payload }) {
