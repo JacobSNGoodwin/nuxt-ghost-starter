@@ -34,7 +34,7 @@ First, it exports the GhostContent API that can then be used in components to fe
 
 Second, you will see the array _postIndexFields_. As you may not want to provide all post data to you home page for posts links, you can configure desired items in this array. See the [Ghost Content API](https://docs.ghost.org/api/content/#resources) for more details.
 
-Last but not least, it contains a function called _generateRoutes_ that is imported in nuxt.config.js. This will generate dynamic routes (depending on how many post pages, authors, and tags are fetched) when you run __npm run generate__. See [https://nuxtjs.org/api/configuration-generate](NUXT generate property).
+Last but not least, it contains a function called _generateRoutes_ that is imported in nuxt.config.js. This will generate dynamic routes (depending on how many post pages, authors, and tags are fetched) when you run __npm run generate__. See [Nuxt generate property](https://nuxtjs.org/api/configuration-generate).
 
 You may need to tweak this to your liking, but for now it generates are post, pages, and index pages for all posts, posts by tag, and post by author with pagination. 
 
