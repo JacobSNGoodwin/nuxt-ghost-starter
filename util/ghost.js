@@ -104,7 +104,7 @@ const generateRoutes = async () => {
   */
   const pages = await api.pages.browse({
     limit: 'all',
-    inlcude: 'authors,tags'
+    include: 'authors,tags'
   })
 
   pages.forEach((page) => {
