@@ -57,7 +57,7 @@ export default {
     // loaded from .env file locally and from netlify in deployment
     ghostUri: process.env.GHOST_URI,
     ghostKey: process.env.GHOST_KEY,
-    siteUrl: 'https://relaxed-panini-623754.netlify.com'
+    siteUrl: process.env.SITE_URL
   },
   workbox: {
     dev: false
