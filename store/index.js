@@ -33,7 +33,7 @@ export const mutations = {
 }
 
 export const actions = {
-  async nuxtServerInit({ commit, error }) {
+  async nuxtServerInit({ commit }, { error }) {
     // get site settings, and whether or not posts have a previous or next post
     // use this for both static and universal apps
     try {
