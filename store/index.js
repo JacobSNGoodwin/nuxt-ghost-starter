@@ -64,6 +64,7 @@ export const actions = {
     } catch (e) {
       // since this is server init, the error would be a server error
       error({ statusCode: 500, message: e.message })
+      throw e
     }
   },
   async getIndexPosts({ commit }, pagination) {
