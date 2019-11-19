@@ -121,7 +121,9 @@ const generateRoutes = async () => {
   const tags = await api.tags.browse({
     fields: 'name,slug,id',
     limit: 'all',
-    filter: 'visibility:public' })
+    filter: 'visibility:public'
+  }
+  )
 
   // get route page for tag and pagination - must use for of loop
   // to work with async/await
