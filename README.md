@@ -50,6 +50,6 @@ The _subFolders_ property was set to false to be able to provide a 404 error pag
 
 ## In Action
 
-To see a Netlify-hosted, statically generated version of this site in action, visit [https://blog.jacobsngoodwin.com](https://blog.jacobsngoodwin.com)
+To see a Netlify-hosted, statically generated version of this site in action, visit [https://blog.jacobgoodwin.me](https://blog.jacobgoodwin.me)
 
 For a detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
