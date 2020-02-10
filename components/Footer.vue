@@ -2,7 +2,8 @@
   <footer class="footer">
     <div class="content has-text-centered">
       <p>
-        <strong>nuxt-ghost-starter</strong> by <a href="https://www.jacobsngoodwin.com">Jacob Goodwin</a>
+        <strong>nuxt-ghost-starter</strong> by
+        <a href="https://www.jacobsngoodwin.com">Jacob Goodwin</a>
       </p>
     </div>
     <div class="content has-text-centered">
@@ -26,8 +27,8 @@
       </span>
       <span class="icon is-large">
         <a
-          target="_blank"
           :href="'https://www.facebook.com/' + settings.facebook"
+          target="_blank"
           class="has-text-info"
         >
           <i class="mdi mdi-36px mdi-facebook" />
@@ -35,8 +36,8 @@
       </span>
       <span class="icon is-large has-text-info">
         <a
-          target="_blank"
           :href="'https://www.twitter.com/' + settings.twitter"
+          target="_blank"
           class="has-text-info"
         >
           <i class="mdi mdi-36px mdi-twitter" />

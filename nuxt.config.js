@@ -42,9 +42,9 @@ export default {
    */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module',
+    '@nuxtjs/eslint-module'
     // Doc: https://github.com/nuxt-community/stylelint-module
-    '@nuxtjs/stylelint-module'
+    // '@nuxtjs/stylelint-module'
   ],
   /*
    ** Nuxt.js modules
@@ -53,9 +53,12 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     // '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    '@nuxtjs/dotenv',
-    'nuxt-purgecss'
+    '@nuxtjs/dotenv'
   ],
+  eslint: {
+    // configure @nuxtjs/eslint-module
+    fix: true
+  },
   env: {
     // loaded from .env file locally and from netlify in deployment
     ghostUri: process.env.GHOST_URI,
@@ -96,12 +99,11 @@ export default {
       })
     }
   },
-  purgecss: {},
   /*
    ** Build configuration
    */
   build: {
-    extractCSS: true,
+    // extractCSS: true,
     // postcss: {
     //   preset: {
     //     features: {
@@ -109,16 +111,6 @@ export default {
     //     }
     //   }
     // },
-    extend(config, ctx) {
-      // Run ESLint on save
-      if (ctx.isDev && ctx.isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
-      }
-    }
+    extend(config, ctx) {}
   }
 }

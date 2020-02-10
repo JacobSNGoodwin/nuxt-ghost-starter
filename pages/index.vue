@@ -19,17 +19,6 @@ export default {
   components: {
     PostList
   },
-  computed: {
-    indexPosts() {
-      return this.$store.state.indexPosts
-    },
-    indexPagination() {
-      return this.$store.state.indexPagination
-    },
-    siteSettings() {
-      return this.$store.state.siteSettings
-    }
-  },
   async fetch({ params, store, error, payload }) {
     if (payload) {
       store.commit('setIndexPosts', payload)
@@ -42,13 +31,24 @@ export default {
       try {
         await store.dispatch('getIndexPosts', {
           filter: '',
-          pageNumber: pageNumber
+          pageNumber
         })
       } catch (e) {
         // as far as user is concerned this isn't an API failure
         error({ statusCode: 404, message: e.message })
       }
       // remember to use await here so data will be available
+    }
+  },
+  computed: {
+    indexPosts() {
+      return this.$store.state.indexPosts
+    },
+    indexPagination() {
+      return this.$store.state.indexPagination
+    },
+    siteSettings() {
+      return this.$store.state.siteSettings
     }
   }
 }
