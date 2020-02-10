@@ -6,8 +6,8 @@ export default {
   mode: 'universal',
 
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
     // title: pkg.name,
     meta: [
@@ -17,35 +17,38 @@ export default {
     ]
   },
   /*
-  ** Add overriding info for meta items
-  */
+   ** Add overriding info for meta items
+   */
   meta: {
     name: 'JSNG' // this is needed to change title for all PWA meta tags
   },
 
   /*
-  ** Customize the progress-bar color
-  */
+   ** Customize the progress-bar color
+   */
   loading: { color: '#e84b0d' },
 
   /*
-  ** Global CSS
-  */
-  css: [
-    '@/assets/css/main.scss',
-    '@mdi/font/css/materialdesignicons.min.css'
-  ],
+   ** Global CSS
+   */
+  css: ['@/assets/css/main.scss', '@mdi/font/css/materialdesignicons.min.css'],
 
   /*
-  ** Plugins to load before mounting the App
-  */
-  plugins: [
-    '~plugins/filters.js'
-  ],
-
+   ** Plugins to load before mounting the App
+   */
+  plugins: ['~plugins/filters.js'],
   /*
-  ** Nuxt.js modules
-  */
+   ** Nuxt.js dev-modules
+   */
+  buildModules: [
+    // Doc: https://github.com/nuxt-community/eslint-module
+    '@nuxtjs/eslint-module',
+    // Doc: https://github.com/nuxt-community/stylelint-module
+    '@nuxtjs/stylelint-module'
+  ],
+  /*
+   ** Nuxt.js modules
+   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     // '@nuxtjs/axios',
@@ -63,15 +66,15 @@ export default {
     dev: false
   },
   /*
-  * Generate dynamic routes for static site generations
-  */
+   * Generate dynamic routes for static site generations
+   */
   generate: {
     subFolders: false,
     routes: generateRoutes
   },
   /*
-  ** Extend routes so multiple routes can use same component
-  */
+   ** Extend routes so multiple routes can use same component
+   */
   router: {
     extendRoutes(routes, resolve) {
       routes.push({
@@ -95,8 +98,8 @@ export default {
   },
   purgecss: {},
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     extractCSS: true,
     // postcss: {
