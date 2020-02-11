@@ -7,48 +7,50 @@
       </p>
     </div>
     <div class="content has-text-centered">
-      <span class="icon is-large has-text-info">
-        <a
-          target="_blank"
-          href="https://github.com/Maxbrain0"
-          class="has-text-info"
-        >
-          <i class="mdi mdi-36px mdi-github-circle" />
-        </a>
-      </span>
-      <span class="icon is-large has-text-info">
-        <a
-          target="_blank"
-          href="https://www.linkedin.com/in/jacobgoodwin1/"
-          class="has-text-info"
-        >
-          <i class="mdi mdi-36px mdi-linkedin" />
-        </a>
-      </span>
-      <span class="icon is-large">
-        <a
-          :href="'https://www.facebook.com/' + settings.facebook"
-          target="_blank"
-          class="has-text-info"
-        >
-          <i class="mdi mdi-36px mdi-facebook" />
-        </a>
-      </span>
-      <span class="icon is-large has-text-info">
-        <a
-          :href="'https://www.twitter.com/' + settings.twitter"
-          target="_blank"
-          class="has-text-info"
-        >
-          <i class="mdi mdi-36px mdi-twitter" />
-        </a>
-      </span>
+      <a target="_blank" href="https://github.com/JacobSNGoodwin" class="">
+        <Github class="social-icon" viewbox="0 0 24 24" />
+      </a>
+
+      <a
+        target="_blank"
+        href="https://www.linkedin.com/in/jacobgoodwin1/"
+        class=""
+      >
+        <LinkedIn class="social-icon" viewbox="0 0 24 24" />
+      </a>
+
+      <a
+        :href="'https://www.facebook.com/' + settings.facebook"
+        target="_blank"
+        class=""
+      >
+        <Facebook class="social-icon" viewbox="0 0 24 24" />
+      </a>
+
+      <a
+        :href="'https://www.twitter.com/' + settings.twitter"
+        target="_blank"
+        class=""
+      >
+        <Twitter class="social-icon" viewbox="0 0 24 24" />
+      </a>
     </div>
   </footer>
 </template>
 
 <script>
+import LinkedIn from '@mdi/svg/svg/linkedin.svg'
+import Github from '@mdi/svg/svg/github-circle.svg'
+import Facebook from '@mdi/svg/svg/facebook.svg'
+import Twitter from '@mdi/svg/svg/twitter.svg'
+
 export default {
+  components: {
+    LinkedIn,
+    Github,
+    Facebook,
+    Twitter
+  },
   props: {
     settings: {
       type: Object,
@@ -57,3 +59,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.social-icon {
+  fill: orangered;
+  width: 36px;
+  height: 36px;
+}
+</style>

@@ -31,7 +31,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['@/assets/css/main.scss', '@mdi/font/css/materialdesignicons.min.css'],
+  css: ['@/assets/css/main.scss'],
 
   /*
    ** Plugins to load before mounting the App
@@ -113,6 +113,16 @@ export default {
         }
       }
     },
-    extend(config, ctx) {}
+    extend(config, ctx) {
+      // config for vue-svg-loader
+      const svgRule = config.module.rules.find((rule) => rule.test.test('.svg'))
+
+      svgRule.test = /\.(png|jpe?g|gif|webp)$/
+
+      config.module.rules.push({
+        test: /\.svg$/,
+        use: ['babel-loader', 'vue-svg-loader']
+      })
+    }
   }
 }
