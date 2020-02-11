@@ -32,7 +32,20 @@ export default {
    ** Global CSS
    */
   css: ['@/assets/css/main.scss'],
-
+  /*
+   ** Global page transition
+   ** https://nuxtjs.org/api/configuration-transition#the-pagetransition-property
+   ** Configure the page transition classes is ~assets/css/main.scss
+   ** Currently disabled and using basic css animation as this doesn't have effect on generated sites
+   */
+  // pageTransition: {
+  //   name: 'page',
+  //   modde: 'in-out'
+  // },
+  // layoutTransition: {
+  //   name: 'page',
+  //   modde: 'in-out'
+  // },
   /*
    ** Plugins to load before mounting the App
    */

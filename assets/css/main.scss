@@ -21,3 +21,32 @@ $navbar-burger-color: $info;
 a {
   transition: color 0.2s ease;
 }
+
+// Page VUE transition - basic fade in and out of opacity
+// .page-enter-active,
+// .page-leave-active {
+//   transition: opacity 0.2s;
+// }
+// .page-enter,
+// .page-leave-active {
+//   opacity: 0;
+// }
+
+.section {
+  animation: fadein 0.35s;
+  animation-timing-function: ease-in;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    // transform: translateX(-50px);
+    // transform: scaleX(0);
+  }
+
+  to {
+    opacity: 1;
+    // transform: translateX(0);
+    // transform: scale(1);
+  }
+}
