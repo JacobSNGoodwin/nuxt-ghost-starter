@@ -5,7 +5,7 @@ const ghost = (url, key) => {
   return new GhostContentAPI({
     url,
     key,
-    version: 'v2'
+    version: 'v3'
   })
 }
 
