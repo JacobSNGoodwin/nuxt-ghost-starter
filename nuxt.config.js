@@ -31,7 +31,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['@/assets/css/main.scss', '@mdi/font/css/materialdesignicons.min.css'],
+  css: ['@/assets/css/main.scss'],
 
   /*
    ** Plugins to load before mounting the App
@@ -53,14 +53,23 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     // '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/style-resources',
+    'nuxt-purgecss'
   ],
   eslint: {
     // configure @nuxtjs/eslint-module
     fix: true
   },
+  purgeCSS: {
+    // configure purgecss
+    type: 'webpack'
+  },
   stylelint: {
     fix: true
+  },
+  styleResources: {
+    scss: ['~assets/css/_colors.scss']
   },
   env: {
     // loaded from .env file locally and from netlify in deployment
@@ -106,12 +115,24 @@ export default {
    ** Build configuration
    */
   build: {
-    // extractCSS: true,
-    // postcss: {
-    //   plugins: {
-    //     cssnano: { preset: 'default ' }
-    //   }
-    // },
-    extend(config, ctx) {}
+    extractCSS: true,
+    postcss: {
+      preset: {
+        features: {
+          customProperties: false
+        }
+      }
+    },
+    extend(config, ctx) {
+      // config for vue-svg-loader
+      const svgRule = config.module.rules.find((rule) => rule.test.test('.svg'))
+
+      svgRule.test = /\.(png|jpe?g|gif|webp)$/
+
+      config.module.rules.push({
+        test: /\.svg$/,
+        use: ['babel-loader', 'vue-svg-loader']
+      })
+    }
   }
 }
