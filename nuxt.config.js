@@ -106,12 +106,13 @@ export default {
    ** Build configuration
    */
   build: {
-    // extractCSS: true,
-    // postcss: {
-    //   plugins: {
-    //     cssnano: { preset: 'default ' }
-    //   }
-    // },
+    postcss: {
+      preset: {
+        features: {
+          customProperties: false
+        }
+      }
+    },
     extend(config, ctx) {}
   }
 }
