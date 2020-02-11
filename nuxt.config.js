@@ -34,24 +34,6 @@ export default {
   css: ['@/assets/css/main.scss', '@mdi/font/css/materialdesignicons.min.css'],
 
   /*
-<<<<<<< HEAD
-   ** Plugins to load before mounting the App
-   */
-  plugins: ['~plugins/filters.js'],
-  /*
-   ** Nuxt.js dev-modules
-   */
-  buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
-    // Doc: https://github.com/nuxt-community/stylelint-module
-    // '@nuxtjs/stylelint-module'
-||||||| merged common ancestors
-  ** Plugins to load before mounting the App
-  */
-  plugins: [
-    '~plugins/filters.js'
-=======
    ** Plugins to load before mounting the App
    */
   plugins: ['~plugins/filters.js'],
@@ -63,7 +45,6 @@ export default {
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module'
->>>>>>> 019-use-nuxt-style
   ],
   /*
    ** Nuxt.js modules
