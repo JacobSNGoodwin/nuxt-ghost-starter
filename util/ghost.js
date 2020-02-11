@@ -3,8 +3,8 @@ import GhostContentAPI from '@tryghost/content-api'
 // we have this function accept variables to be accessible to config.js
 const ghost = (url, key) => {
   return new GhostContentAPI({
-    url: url,
-    key: key,
+    url,
+    key,
     version: 'v2'
   })
 }
@@ -35,8 +35,8 @@ const generateRoutes = async () => {
   const routes = []
 
   /*
-  ** 404 page with access to site settings for navigation
-  */
+   ** 404 page with access to site settings for navigation
+   */
 
   const settings = await api.settings.browse()
   routes.push({
@@ -45,10 +45,10 @@ const generateRoutes = async () => {
   })
 
   /*
-  *
-  * Create post index pages (with only subset of post data)
-  *
-  **/
+   *
+   * Create post index pages (with only subset of post data)
+   *
+   **/
   let nextPage = 1
   do {
     const posts = await api.posts.browse({
@@ -100,8 +100,8 @@ const generateRoutes = async () => {
   })
 
   /*
-  ** get pages
-  */
+   ** get pages
+   */
   const pages = await api.pages.browse({
     limit: 'all',
     include: 'authors,tags'
@@ -115,15 +115,14 @@ const generateRoutes = async () => {
   })
 
   /*
-  ** create tag index routes
-  */
+   ** create tag index routes
+   */
 
   const tags = await api.tags.browse({
     fields: 'name,slug,id',
     limit: 'all',
     filter: 'visibility:public'
-  }
-  )
+  })
 
   // get route page for tag and pagination - must use for of loop
   // to work with async/await
@@ -154,8 +153,8 @@ const generateRoutes = async () => {
   }
 
   /*
-  ** create author index routes
-  */
+   ** create author index routes
+   */
 
   const authors = await api.authors.browse({
     fields: 'name,slug,id',
@@ -182,7 +181,8 @@ const generateRoutes = async () => {
         })
       } else {
         routes.push({
-          route: '/author/' + author.slug + '/page/' + posts.meta.pagination.page,
+          route:
+            '/author/' + author.slug + '/page/' + posts.meta.pagination.page,
           payload: posts
         })
       }
