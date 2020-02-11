@@ -157,6 +157,15 @@ export default {
   display: flex;
   flex-direction: column;
 
+  p {
+    align-self: center;
+    img {
+      display: block;
+      margin: 1em auto;
+      max-width: 100vw;
+    }
+  }
+
   .post-feature-image {
     align-self: center;
     margin-bottom: 2em;
@@ -193,15 +202,6 @@ export default {
 
   .kg-width-full {
     .kg-image {
-      max-width: 100vw;
-    }
-  }
-
-  p {
-    align-self: center;
-    img {
-      display: block;
-      margin: 1em auto;
       max-width: 100vw;
     }
   }
