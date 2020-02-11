@@ -1,13 +1,11 @@
-@import '~bulma/sass/utilities/initial-variables';
-@import '~bulma/sass/utilities/functions';
+@use '~bulma/sass/utilities/initial-variables';
+@use '~bulma/sass/utilities/functions';
+@use './colors.scss';
 
 // Add customization here
 $fullhd-enabled: false;
 $widescreen-enabled: false;
 $section-padding: 3em 2em;
-$primary: rgb(14, 45, 77);
-$info: rgb(232, 75, 13);
-$link: rgb(232, 75, 13);
 $tablet: 768px; // include ipad
 
 $navbar-burger-color: $info;
@@ -18,4 +16,8 @@ $navbar-burger-color: $info;
   span {
     height: 2px;
   }
+}
+
+a {
+  transition: color 0.2s ease;
 }

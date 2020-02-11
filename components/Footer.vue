@@ -62,8 +62,13 @@ export default {
 
 <style lang="scss" scoped>
 .social-icon {
-  fill: orangered;
+  fill: $info;
   width: 36px;
   height: 36px;
+  transition: fill 0.2s ease;
+
+  &:hover {
+    fill: $primary;
+  }
 }
 </style>

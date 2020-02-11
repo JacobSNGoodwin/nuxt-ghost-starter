@@ -53,7 +53,8 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     // '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/style-resources'
   ],
   eslint: {
     // configure @nuxtjs/eslint-module
@@ -61,6 +62,9 @@ export default {
   },
   stylelint: {
     fix: true
+  },
+  styleResources: {
+    scss: ['~assets/css/_colors.scss']
   },
   env: {
     // loaded from .env file locally and from netlify in deployment
