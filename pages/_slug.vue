@@ -75,10 +75,7 @@ export default {
     const cards = document.getElementsByClassName('kg-embed-card')
     for (const card of cards) {
       const iframe = card.firstElementChild
-      const iframeHeight = iframe.getAttribute('height')
-      if (iframeHeight) {
-        iframe.style.height = iframeHeight + 'px'
-      }
+      console.log(iframe)
     }
   },
   head() {
@@ -157,6 +154,7 @@ export default {
   display: flex;
   flex-direction: column;
 
+  // handle markdown images which are inside of paragraphs
   p {
     align-self: center;
     img {
@@ -178,6 +176,11 @@ export default {
 .post-content {
   display: flex;
   flex-direction: column;
+
+  p {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
 
   .instagram-media,
   .instagram-media-rendered {
@@ -203,6 +206,15 @@ export default {
   .kg-width-full {
     .kg-image {
       max-width: 100vw;
+    }
+  }
+
+  .kg-embed-card {
+    align-self: center;
+    width: 100vw;
+    max-width: 768px;
+    iframe {
+      max-width: 100%;
     }
   }
 }

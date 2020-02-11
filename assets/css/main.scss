@@ -35,6 +35,8 @@ a {
 .section {
   animation: fadein 0.35s;
   animation-timing-function: ease-in;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 @keyframes fadein {
