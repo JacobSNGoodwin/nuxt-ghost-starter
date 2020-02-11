@@ -54,11 +54,16 @@ export default {
     // '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    'nuxt-purgecss'
   ],
   eslint: {
     // configure @nuxtjs/eslint-module
     fix: true
+  },
+  purgeCSS: {
+    // configure purgecss
+    type: 'webpack'
   },
   stylelint: {
     fix: true
@@ -110,6 +115,7 @@ export default {
    ** Build configuration
    */
   build: {
+    extractCSS: true,
     postcss: {
       preset: {
         features: {
