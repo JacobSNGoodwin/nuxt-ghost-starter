@@ -42,9 +42,9 @@ export default {
    */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/stylelint-module
-    // '@nuxtjs/stylelint-module'
+    '@nuxtjs/stylelint-module'
   ],
   /*
    ** Nuxt.js modules
@@ -57,6 +57,9 @@ export default {
   ],
   eslint: {
     // configure @nuxtjs/eslint-module
+    fix: true
+  },
+  stylelint: {
     fix: true
   },
   env: {
@@ -103,12 +106,10 @@ export default {
    ** Build configuration
    */
   build: {
-    // extractCSS: true,
+    extractCSS: true,
     // postcss: {
-    //   preset: {
-    //     features: {
-    //       customProperties: true
-    //     }
+    //   plugins: {
+    //     cssnano: { preset: 'default ' }
     //   }
     // },
     extend(config, ctx) {}
