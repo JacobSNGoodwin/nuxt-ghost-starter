@@ -70,14 +70,6 @@ export default {
       return this.$store.state.siteSettings
     }
   },
-  mounted() {
-    // ghetto way of overcoming iFrame height "challenge/annoyance"
-    const cards = document.getElementsByClassName('kg-embed-card')
-    for (const card of cards) {
-      const iframe = card.firstElementChild
-      console.log(iframe)
-    }
-  },
   head() {
     return {
       title: this.post.title,
@@ -150,6 +142,7 @@ export default {
 </script>
 
 <style lang="scss">
+// Scoped style doens't work here. Probably because rendered html is outside of control of vue
 .post-container {
   display: flex;
   flex-direction: column;
@@ -171,75 +164,75 @@ export default {
       max-width: 100vw;
     }
   }
-}
 
-.post-content {
-  display: flex;
-  flex-direction: column;
-  padding-left: 1em;
-  padding-right: 1em;
-
-  .kg-image-card {
-    align-self: center;
-    .kg-image {
-      max-width: 75vw;
-    }
-    figcaption {
-      padding: 0 2em;
-    }
-  }
-
-  .kg-width-wide {
-    .kg-image {
-      max-width: 85vw;
-    }
-  }
-
-  .kg-width-full {
-    .kg-image {
-      max-width: 100vw;
-    }
-  }
-
-  .kg-embed-card {
+  .post-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    align-self: center;
-    width: 100vw;
-    max-width: 768px;
-    iframe {
-      max-width: 100%;
+    padding-left: 1em;
+    padding-right: 1em;
+
+    .kg-image-card {
+      align-self: center;
+      .kg-image {
+        max-width: 75vw;
+      }
+      figcaption {
+        padding: 0 2em;
+      }
     }
-  }
 
-  .kg-gallery-card {
-    align-self: center;
-    width: 100vw;
+    .kg-width-wide {
+      .kg-image {
+        max-width: 85vw;
+      }
+    }
 
-    .kg-gallery-container {
+    .kg-width-full {
+      .kg-image {
+        max-width: 100vw;
+      }
+    }
+
+    .kg-embed-card {
       display: flex;
       flex-direction: column;
-      .kg-gallery-row {
+      align-items: center;
+      align-self: center;
+      width: 100vw;
+      max-width: 768px;
+      iframe {
+        max-width: 100%;
+      }
+    }
+
+    .kg-gallery-card {
+      align-self: center;
+      width: 100vw;
+
+      .kg-gallery-container {
         display: flex;
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
-        .kg-gallery-image {
-          &:first-child:nth-last-child(1) {
-            width: 100%;
-          }
-          &:first-child:nth-last-child(2),
-          &:first-child:nth-last-child(2) ~ * {
-            width: 50%;
-          }
-          &:first-child:nth-last-child(3),
-          &:first-child:nth-last-child(3) ~ * {
-            width: 33.33%;
-          }
-          max-width: 550px;
-          img {
-            display: block;
+        flex-direction: column;
+        .kg-gallery-row {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          flex-wrap: wrap;
+          .kg-gallery-image {
+            &:first-child:nth-last-child(1) {
+              width: 100%;
+            }
+            &:first-child:nth-last-child(2),
+            &:first-child:nth-last-child(2) ~ * {
+              width: 50%;
+            }
+            &:first-child:nth-last-child(3),
+            &:first-child:nth-last-child(3) ~ * {
+              width: 33.33%;
+            }
+            max-width: 550px;
+            img {
+              display: block;
+            }
           }
         }
       }
