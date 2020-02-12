@@ -129,13 +129,13 @@ export default {
    */
   build: {
     extractCSS: true,
-    postcss: {
-      preset: {
-        features: {
-          customProperties: false
-        }
-      }
-    },
+    // postcss: {
+    //   preset: {
+    //     features: {
+    //       customProperties: false
+    //     }
+    //   }
+    // },
     extend(config, ctx) {
       // config for vue-svg-loader
       const svgRule = config.module.rules.find((rule) => rule.test.test('.svg'))
