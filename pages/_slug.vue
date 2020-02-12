@@ -70,17 +70,6 @@ export default {
       return this.$store.state.siteSettings
     }
   },
-  mounted() {
-    // ghetto way of overcoming iFrame height "challenge/annoyance"
-    const cards = document.getElementsByClassName('kg-embed-card')
-    for (const card of cards) {
-      const iframe = card.firstElementChild
-      const iframeHeight = iframe.getAttribute('height')
-      if (iframeHeight) {
-        iframe.style.height = iframeHeight + 'px'
-      }
-    }
-  },
   head() {
     return {
       title: this.post.title,
@@ -153,10 +142,12 @@ export default {
 </script>
 
 <style lang="scss">
+// Scoped style doens't work here. Probably because rendered html is outside of control of vue
 .post-container {
   display: flex;
   flex-direction: column;
 
+  // handle markdown images which are inside of paragraphs
   p {
     align-self: center;
     img {
@@ -173,36 +164,161 @@ export default {
       max-width: 100vw;
     }
   }
-}
 
-.post-content {
-  display: flex;
-  flex-direction: column;
+  .post-content {
+    display: flex;
+    flex-direction: column;
+    padding-left: 1em;
+    padding-right: 1em;
 
-  .instagram-media,
-  .instagram-media-rendered {
-    margin: auto !important;
-  }
+    // bookmark styles taken from https://ghost.org/docs/api/v3/handlebars-themes/editor/
+    .kg-bookmark-card {
+      align-self: center;
+      width: 100%;
+      position: relative;
 
-  .kg-image-card {
-    align-self: center;
-    .kg-image {
-      max-width: 75vw;
+      .kg-bookmark-container {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        color: currentColor;
+        font-family: inherit;
+        text-decoration: none;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+
+        &:hover {
+          text-decoration: none;
+        }
+
+        .kg-bookmark-content {
+          flex-basis: 0;
+          flex-grow: 999;
+          padding: 20px;
+          order: 1;
+
+          .kg-bookmark-title {
+            font-weight: 600;
+          }
+
+          .kg-bookmark-metadata,
+          .kg-bookmark-description {
+            margin-top: 0.5em;
+          }
+
+          .kg-bookmark-metadata {
+            align-items: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            .kg-bookmark-icon {
+              display: inline-block;
+              width: 1em;
+              height: 1em;
+              vertical-align: text-bottom;
+              margin-right: 0.5em;
+              margin-bottom: 0.05em;
+            }
+
+            .kg-bookmark-author {
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              overflow: hidden;
+            }
+
+            .kg-bookmark-publisher::before {
+              content: '•';
+              margin: 0 0.5em;
+            }
+          }
+
+          .kg-bookmark-description {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+          }
+        }
+        .kg-bookmark-thumbnail {
+          display: flex;
+          flex-basis: 24rem;
+          flex-grow: 1;
+        }
+
+        .kg-bookmark-thumbnail img {
+          max-width: 100%;
+          height: auto;
+          vertical-align: bottom;
+          object-fit: cover;
+        }
+      }
     }
-    figcaption {
-      padding: 0 2em;
-    }
-  }
 
-  .kg-width-wide {
-    .kg-image {
-      max-width: 85vw;
+    .kg-image-card {
+      align-self: center;
+      .kg-image {
+        max-width: 75vw;
+      }
+      figcaption {
+        padding: 0 2em;
+      }
     }
-  }
 
-  .kg-width-full {
-    .kg-image {
-      max-width: 100vw;
+    .kg-width-wide {
+      .kg-image {
+        max-width: 85vw;
+      }
+    }
+
+    .kg-width-full {
+      .kg-image {
+        max-width: 100vw;
+      }
+    }
+
+    .kg-embed-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      align-self: center;
+      width: 100vw;
+      max-width: 768px;
+      iframe {
+        max-width: 100%;
+      }
+    }
+
+    .kg-gallery-card {
+      align-self: center;
+      width: 100vw;
+
+      .kg-gallery-container {
+        display: flex;
+        flex-direction: column;
+        .kg-gallery-row {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          flex-wrap: wrap;
+          .kg-gallery-image {
+            &:first-child:nth-last-child(1) {
+              width: 100%;
+            }
+            &:first-child:nth-last-child(2),
+            &:first-child:nth-last-child(2) ~ * {
+              width: 50%;
+            }
+            &:first-child:nth-last-child(3),
+            &:first-child:nth-last-child(3) ~ * {
+              width: 33.33%;
+            }
+            max-width: 550px;
+            img {
+              display: block;
+            }
+          }
+        }
+      }
     }
   }
 }
