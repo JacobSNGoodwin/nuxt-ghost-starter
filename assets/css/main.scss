@@ -1,12 +1,11 @@
 @use '~bulma/sass/utilities/initial-variables';
 @use '~bulma/sass/utilities/functions';
-@use './colors.scss';
+@use './_variables.scss';
 
 // Add customization here
 $fullhd-enabled: false;
 $widescreen-enabled: false;
 $section-padding: 3em 2em;
-$tablet: 768px; // include ipad
 
 $navbar-burger-color: $info;
 
@@ -20,6 +19,10 @@ $navbar-burger-color: $info;
 
 a {
   transition: color 0.2s ease;
+}
+
+p {
+  font-size: 1.1em;
 }
 
 // Page VUE transition - basic fade in and out of opacity

@@ -176,11 +176,8 @@ export default {
 .post-content {
   display: flex;
   flex-direction: column;
-
-  p {
-    padding-left: 8px;
-    padding-right: 8px;
-  }
+  padding-left: 1em;
+  padding-right: 1em;
 
   .instagram-media,
   .instagram-media-rendered {
@@ -215,6 +212,39 @@ export default {
     max-width: 768px;
     iframe {
       max-width: 100%;
+    }
+  }
+
+  .kg-gallery-card {
+    align-self: center;
+    width: 100vw;
+
+    .kg-gallery-container {
+      display: flex;
+      flex-direction: column;
+      .kg-gallery-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        .kg-gallery-image {
+          &:first-child:nth-last-child(1) {
+            width: 100%;
+          }
+          &:first-child:nth-last-child(2),
+          &:first-child:nth-last-child(2) ~ * {
+            width: 50%;
+          }
+          &:first-child:nth-last-child(3),
+          &:first-child:nth-last-child(3) ~ * {
+            width: 33.33%;
+          }
+          max-width: 550px;
+          img {
+            display: block;
+          }
+        }
+      }
     }
   }
 }

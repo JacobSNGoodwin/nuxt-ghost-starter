@@ -82,7 +82,7 @@ export default {
     fix: true
   },
   styleResources: {
-    scss: ['~assets/css/_colors.scss']
+    scss: ['~assets/css/_variables.scss']
   },
   env: {
     // loaded from .env file locally and from netlify in deployment
