@@ -3,7 +3,7 @@
     <div class="content has-text-centered">
       <p>
         <strong>nuxt-ghost-starter</strong> by
-        <a href="https://www.jacobsngoodwin.com">Jacob Goodwin</a>
+        <a href="https://www.jacobgoodwin.me">Jacob Goodwin</a>
       </p>
     </div>
     <div class="content has-text-centered">
