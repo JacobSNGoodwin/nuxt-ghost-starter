@@ -179,11 +179,6 @@ export default {
   padding-left: 1em;
   padding-right: 1em;
 
-  .instagram-media,
-  .instagram-media-rendered {
-    margin: auto !important;
-  }
-
   .kg-image-card {
     align-self: center;
     .kg-image {
@@ -207,6 +202,9 @@ export default {
   }
 
   .kg-embed-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     align-self: center;
     width: 100vw;
     max-width: 768px;
