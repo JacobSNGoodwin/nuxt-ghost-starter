@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'ErrorPage',
+  name: 'Dynamic404Page',
   props: {
     error: {
       type: Object,
