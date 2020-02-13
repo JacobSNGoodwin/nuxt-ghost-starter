@@ -6,8 +6,8 @@ export default {
   mode: 'universal',
 
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
     // title: pkg.name,
     meta: [
@@ -17,42 +17,82 @@ export default {
     ]
   },
   /*
-  ** Add overriding info for meta items
-  */
+   ** Add overriding info for meta items
+   */
   meta: {
     name: 'JSNG' // this is needed to change title for all PWA meta tags
   },
 
   /*
-  ** Customize the progress-bar color
-  */
+   ** Customize the progress-bar color
+   */
   loading: { color: '#e84b0d' },
 
   /*
-  ** Global CSS
-  */
-  css: [
-    '@/assets/css/main.scss',
-    '@mdi/font/css/materialdesignicons.min.css'
-  ],
-
+   ** Global CSS
+   */
+  css: ['@/assets/css/main.scss'],
   /*
-  ** Plugins to load before mounting the App
-  */
-  plugins: [
-    '~plugins/filters.js'
-  ],
-
+   ** Global page transition
+   ** https://nuxtjs.org/api/configuration-transition#the-pagetransition-property
+   ** Configure the page transition classes is ~assets/css/main.scss
+   ** Currently disabled and using basic css animation as this doesn't have effect on generated sites
+   */
+  // pageTransition: {
+  //   name: 'page',
+  //   modde: 'in-out'
+  // },
+  // layoutTransition: {
+  //   name: 'page',
+  //   modde: 'in-out'
+  // },
   /*
-  ** Nuxt.js modules
-  */
+   ** Plugins to load before mounting the App
+   */
+  plugins: ['~plugins/filters.js'],
+  /*
+   ** Nuxt.js dev-modules
+   */
+  buildModules: [
+    // Doc: https://github.com/nuxt-community/eslint-module
+    '@nuxtjs/eslint-module',
+    // Doc: https://github.com/nuxt-community/stylelint-module
+    '@nuxtjs/stylelint-module'
+  ],
+  /*
+   ** Nuxt.js modules
+   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     // '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
-    'nuxt-purgecss'
+    '@nuxtjs/style-resources',
+    'nuxt-purgecss',
+    '@nuxtjs/sitemap'
   ],
+  eslint: {
+    // configure @nuxtjs/eslint-module
+    fix: true
+  },
+  purgeCSS: {
+    // configure purgecss
+    type: 'webpack'
+  },
+  stylelint: {
+    fix: true
+  },
+  styleResources: {
+    scss: ['~assets/css/_variables.scss']
+  },
+  sitemap: {
+    hostname: process.env.SITE_URL,
+    gzip: true,
+    // exclude can be used to exclude non-dynamic routes from the site-map
+    // Any route in the generate.routes property will be added to the sitemap
+    // and it doesn't appear such a route can be excluded
+    exclude: ['/404']
+  },
   env: {
     // loaded from .env file locally and from netlify in deployment
     ghostUri: process.env.GHOST_URI,
@@ -63,15 +103,15 @@ export default {
     dev: false
   },
   /*
-  * Generate dynamic routes for static site generations
-  */
+   * Generate dynamic routes for static site generations
+   */
   generate: {
     subFolders: false,
     routes: generateRoutes
   },
   /*
-  ** Extend routes so multiple routes can use same component
-  */
+   ** Extend routes so multiple routes can use same component
+   */
   router: {
     extendRoutes(routes, resolve) {
       routes.push({
@@ -93,29 +133,28 @@ export default {
       })
     }
   },
-  purgecss: {},
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     extractCSS: true,
-    // postcss: {
-    //   preset: {
-    //     features: {
-    //       customProperties: true
-    //     }
-    //   }
-    // },
-    extend(config, ctx) {
-      // Run ESLint on save
-      if (ctx.isDev && ctx.isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
+    postcss: {
+      preset: {
+        features: {
+          customProperties: false
+        }
       }
+    },
+    extend(config, ctx) {
+      // config for vue-svg-loader
+      const svgRule = config.module.rules.find((rule) => rule.test.test('.svg'))
+
+      svgRule.test = /\.(png|jpe?g|gif|webp)$/
+
+      config.module.rules.push({
+        test: /\.svg$/,
+        use: ['babel-loader', 'vue-svg-loader']
+      })
     }
   }
 }

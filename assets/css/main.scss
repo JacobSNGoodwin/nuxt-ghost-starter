@@ -1,14 +1,11 @@
-@import '~bulma/sass/utilities/initial-variables';
-@import '~bulma/sass/utilities/functions';
+@use '~bulma/sass/utilities/initial-variables';
+@use '~bulma/sass/utilities/functions';
+@use './_variables.scss';
 
 // Add customization here
 $fullhd-enabled: false;
 $widescreen-enabled: false;
 $section-padding: 3em 2em;
-$primary: rgb(14, 45, 77);
-$info: rgb(232, 75, 13);
-$link: rgb(232, 75, 13);
-$tablet: 768px; // include ipad
 
 $navbar-burger-color: $info;
 
@@ -17,5 +14,44 @@ $navbar-burger-color: $info;
 .navbar-burger {
   span {
     height: 2px;
+  }
+}
+
+a {
+  transition: color 0.2s ease;
+}
+
+p {
+  font-size: 1.1em;
+}
+
+// Page VUE transition - basic fade in and out of opacity
+// .page-enter-active,
+// .page-leave-active {
+//   transition: opacity 0.2s;
+// }
+// .page-enter,
+// .page-leave-active {
+//   opacity: 0;
+// }
+
+.section {
+  animation: fadein 0.35s;
+  animation-timing-function: ease-in;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    // transform: translateX(-50px);
+    // transform: scaleX(0);
+  }
+
+  to {
+    opacity: 1;
+    // transform: translateX(0);
+    // transform: scale(1);
   }
 }

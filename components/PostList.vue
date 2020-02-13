@@ -1,9 +1,15 @@
 <template>
   <div>
-    <nuxt-link v-for="post in posts" :key="post.id" :to="'/' + post.slug" tag="div" class="card">
+    <nuxt-link
+      v-for="post in posts"
+      :key="post.id"
+      :to="'/' + post.slug"
+      tag="div"
+      class="card"
+    >
       <div v-if="post.feature_image" class="card-image">
         <figure class="image">
-          <img :src="post.feature_image" alt="Placeholder image">
+          <img :src="post.feature_image" alt="Placeholder image" />
         </figure>
       </div>
       <div class="card-content">
@@ -18,7 +24,11 @@
         <div v-for="author in post.authors" :key="author.id">
           <nuxt-link :to="'/author/' + author.slug">
             <figure class="image is-96x96">
-              <img :src="author.profile_image" alt="Author image" class="is-rounded">
+              <img
+                :src="author.profile_image"
+                alt="Author image"
+                class="is-rounded"
+              />
             </figure>
           </nuxt-link>
           <p class="title is-5 has-text-centered">
@@ -29,14 +39,22 @@
         </div>
         <div class="content">
           <div class="buttons is-centered">
-            <nuxt-link v-for="tag in post.tags" :key="tag.id" :to="'/tag/' + tag.slug" class="button is-primary">
+            <nuxt-link
+              v-for="tag in post.tags"
+              :key="tag.id"
+              :to="'/tag/' + tag.slug"
+              class="button is-primary"
+            >
               {{ tag.name }}
             </nuxt-link>
           </div>
           <p v-if="post.custom_excerpt" class="has-text-centered">
             {{ post.custom_excerpt }}
           </p>
-          <p v-else-if="post.excerpt && !post.custom_excerpt" class="has-text-centered">
+          <p
+            v-else-if="post.excerpt && !post.custom_excerpt"
+            class="has-text-centered"
+          >
             <!-- Seems to be an issue with getting excerpt via content api client -->
             {{ post.excerpt }}...
           </p>
@@ -94,16 +112,16 @@ export default {
 </script>
 
 <style scoped>
-  .card {
-    margin: 1.5em 0 1.5em 0;
-    cursor: pointer;
-  }
+.card {
+  margin: 1.5em 0 1.5em 0;
+  cursor: pointer;
+}
 
-  figure {
-    margin: 1em auto;
-  }
+figure {
+  margin: 1em auto;
+}
 
-  .content {
-    margin-top: 1em;
-  }
+.content {
+  margin-top: 1em;
+}
 </style>

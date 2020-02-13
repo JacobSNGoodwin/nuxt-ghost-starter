@@ -1,5 +1,8 @@
 {
-  "eslint.autoFixOnSave": true,
-  "vetur.validation.template": false,
-  "editor.formatOnSave": false
+  "vetur.format.enable": false,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  },
 }

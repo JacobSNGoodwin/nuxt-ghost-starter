@@ -13,19 +13,13 @@
 
 <script>
 export default {
-  name: 'ErrorPage',
-  props: {
-    error: {
-      type: Object,
-      default: null
-    }
-  }
+  name: '404Page'
 }
 </script>
 
 <style scoped>
-  .error-container {
-    margin-top: 2em;
-    margin-bottom: 2em;
-  }
+.error-container {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
 </style>
