@@ -1,6 +1,6 @@
 {
   "name": "nuxt-jsng",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Blog build with Nuxt, Ghost Content API, and Netlify",
   "author": "Jacob Goodwin",
   "private": true,
