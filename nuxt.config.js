@@ -68,7 +68,8 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
     '@nuxtjs/style-resources',
-    'nuxt-purgecss'
+    'nuxt-purgecss',
+    '@nuxtjs/sitemap'
   ],
   eslint: {
     // configure @nuxtjs/eslint-module
@@ -83,6 +84,14 @@ export default {
   },
   styleResources: {
     scss: ['~assets/css/_variables.scss']
+  },
+  sitemap: {
+    hostname: process.env.SITE_URL,
+    gzip: true,
+    // exclude can be used to exclude non-dynamic routes from the site-map
+    // Any route in the generate.routes property will be added to the sitemap
+    // and it doesn't appear such a route can be excluded
+    exclude: ['/404']
   },
   env: {
     // loaded from .env file locally and from netlify in deployment
